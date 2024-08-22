@@ -9,11 +9,11 @@ function App() {
   return (
     <>
       <Switch>
-        <PageContent>
-          <Route path="/">
+        <Route path="/">
+          <PageContent>
             <HomePage />
-          </Route>
-        </PageContent>
+          </PageContent>
+        </Route>
       </Switch>
       <ToastContainer />
     </>
