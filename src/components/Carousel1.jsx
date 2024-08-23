@@ -11,7 +11,6 @@ export default function Carousel1() {
         NEW COLLECTION
       </h1>
       <p className="absolute left-20 right-20 top-1/2 px-4 text-center text-lg leading-normal text-white">
-        {" "}
         We know how large objects will act, but things on a small scale.
       </p>
       <button className="absolute left-1 top-1/2 p-2">
