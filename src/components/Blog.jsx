@@ -9,17 +9,17 @@ export default function Blog() {
     },
     {
       id: 2,
-      image: "/blog/unsplash_gEZkP23pLZ4.png",
+      image: "/blog/unsplash_CuEvrPd3NYc.png",
       title: "Loudest a la Madison #2 (L'integral)",
-      date: "23 April 2021",
-      comments: "8 comments",
+      date: "22 April 2021",
+      comments: "10 comments",
     },
     {
       id: 3,
       image: "/blog/unsplash_k0rVudBoB4c.png",
       title: "Loudest a la Madison #3 (L'integral)",
-      date: "24 April 2021",
-      comments: "12 comments",
+      date: "22 April 2021",
+      comments: "10 comments",
     },
   ];
 
