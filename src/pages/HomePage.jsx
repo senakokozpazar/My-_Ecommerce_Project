@@ -1,16 +1,14 @@
-import BestSellers from "@/components/BestSellers";
 import Blog from "@/components/Blog";
-import Container from "@/components/Container";
 import EditorsPick from "@/components/EditorsPick";
-import Slider from "@/components/Slider";
+import Carousel1 from "@/components/Carousel1";
+import BestSellers from "@/components/BestSellers";
 
 export default function HomePage() {
   return (
     <div>
+      <Carousel1 />
       <EditorsPick />
       <BestSellers />
-      <Slider />
-      <Container />
       <Blog />
     </div>
   );
