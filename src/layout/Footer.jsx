@@ -29,17 +29,29 @@ export default function Footer() {
     },
   ];
   return (
-    <div className="mx-5 flex flex-col items-center font-montserrat">
-      <div className="mt-52 flex w-full flex-col bg-[#FAFAFA]">
-        <img src="navbar-brand.png" className="m-5 h-[58px] w-[187px]" />
-        <div className="m-5 flex justify-start gap-5">
-          <img src="/footer/facebook.png"></img>
-          <img src="/footer/ant-design_instagram-outlined.png"></img>
-          <img src="/footer/ant-design_twitter-outlined.png"></img>
+    <div className="mx-5 flex flex-col items-center font-montserrat lg:mx-0">
+      <div className="mt-52 flex w-full flex-col bg-[#FAFAFA] lg:mx-0 lg:flex-row lg:justify-between lg:px-0">
+        <img
+          src="navbar-brand.png"
+          className="m-5 h-[58px] w-[187px] lg:ml-28"
+        />
+        <div className="m-5 flex justify-start gap-5 lg:items-center lg:justify-center">
+          <img
+            src="/footer/facebook.png"
+            className="lg:h-[24px] lg:w-[24px]"
+          ></img>
+          <img
+            src="/footer/ant-design_instagram-outlined.png"
+            className="lg:h-[24px] lg:w-[24px]"
+          ></img>
+          <img
+            src="/footer/ant-design_twitter-outlined.png"
+            className="lg:h-[24px] lg:w-[24px]"
+          ></img>
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-start">
+      <div className="flex flex-wrap justify-start lg:flex-nowrap lg:gap-20">
         {infoSections.map((section) => (
           <div key={section.id} className="mt-20 flex w-full flex-col">
             <p className="mb-10 text-left text-base font-semibold leading-[24px] tracking-[0.1px] text-[#252B42]">
@@ -73,12 +85,11 @@ export default function Footer() {
             Lore imp sum dolor Amit
           </p>
         </div>
-        <div className="w-full bg-[#FAFAFA]">
-          <p className="tex-[#252B42] m-5 text-center text-sm font-semibold">
-            Made with love by <br />
-            Finland All Right Reserved
-          </p>
-        </div>
+      </div>
+      <div className="w-full items-center justify-center bg-[#FAFAFA] lg:mx-0">
+        <p className="tex-[#252B42] m-5 max-w-xs items-center text-center text-sm font-semibold lg:ml-28 lg:max-w-lg lg:text-left">
+          Made with love by Finland All Right Reserved
+        </p>
       </div>
     </div>
   );

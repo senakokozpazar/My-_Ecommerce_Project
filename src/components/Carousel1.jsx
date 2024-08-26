@@ -29,7 +29,7 @@ export default function Carousel1() {
       <button className="absolute right-1 top-1/2 p-2">
         <i class="fa-solid fa-chevron-left fa-flip-horizontal text-4xl text-white"></i>
       </button>
-      <Button className="absolute bottom-40 left-[35%] h-10 w-44 rounded-none !bg-green-600 p-7 text-lg lg:bottom-28 lg:left-40">
+      <Button className="absolute bottom-40 left-[35%] h-10 w-44 !bg-green-600 p-7 text-lg lg:bottom-28 lg:left-40">
         SHOP NOW
       </Button>
     </div>

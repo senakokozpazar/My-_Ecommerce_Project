@@ -20,10 +20,26 @@ export default function Header() {
           </div>
           <div className="m-3 flex gap-3">
             <p>Follow Us : </p>
-            <img src="/navbaricons/a.png" alt="instagram" />
-            <img src="/navbaricons/icn settings icn-xs.png" alt="youtube" />
-            <img src="/navbaricons/facebook.png" alt="facebook" />
-            <img src="/navbaricons/twitter.png" alt="twitter" />
+            <img
+              src="/navbaricons/a.png"
+              alt="instagram"
+              className="h-[24px] w-[24px]"
+            />
+            <img
+              src="/navbaricons/icn settings icn-xs.png"
+              alt="youtube"
+              className="h-[24px] w-[24px]"
+            />
+            <img
+              src="/navbaricons/facebook.png"
+              alt="facebook"
+              className="h-[24px] w-[24px]"
+            />
+            <img
+              src="/navbaricons/twitter.png"
+              alt="twitter"
+              className="h-[24px] w-[24px]"
+            />
           </div>
         </div>
         <div className="sticky z-10 flex h-[58px] items-center justify-between bg-white text-sm font-semibold leading-[24px] tracking-[0.2px]">
