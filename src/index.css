@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.active_link {
+  @apply font-normal;
+}
