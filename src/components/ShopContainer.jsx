@@ -55,9 +55,9 @@ export default function ShopContainer() {
         </NavLink>
       </ul>
 
-      <div className="flex flex-col items-center justify-center gap-3">
+      <div className="flex flex-col items-center justify-center gap-3 lg:m-3 lg:flex-row lg:justify-around">
         {shopCards.map((card, index) => (
-          <div key={index} className="relative text-white">
+          <div key={index} className="relative text-white lg:w-1/4">
             <img src={card.src} className="h-[330px] w-[332px] object-cover" />
             <div className="flex flex-col items-center justify-center font-semibold">
               <p className="absolute top-1/2 text-center text-base">
