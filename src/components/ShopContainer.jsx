@@ -29,7 +29,7 @@ export default function ShopContainer() {
     },
   ];
   return (
-    <div className="bg-[#FAFAFA] font-montserrat">
+    <div className="bg-[#FAFAFA] pb-10 font-montserrat">
       <div className="m-10 mb-5 flex items-center justify-center p-14">
         <h1 className="text-2xl font-semibold leading-[32px] tracking-[0.1px] text-[#252B42]">
           Shop
