@@ -1,5 +1,5 @@
 import { products } from "@/mockdatas/product";
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import { productimages } from "@/mockdatas/productimages";
 import { Link } from "react-router-dom";
 

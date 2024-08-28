@@ -37,7 +37,7 @@ export default function Footer() {
         className={`mt-52 flex w-full flex-col ${location.pathname === "/shop" ? "bg-white" : "bg-[#FAFAFA]"} lg:mx-0 lg:flex-row lg:justify-between lg:px-0`}
       >
         <img
-          src="navbar-brand.png"
+          src="/navbar-brand.png"
           className="m-5 h-[58px] w-[187px] lg:ml-28"
         />
         <div className="m-5 flex justify-start gap-5 lg:items-center lg:justify-center">

@@ -2,10 +2,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import PageContent from "./layout/PageContent";
-import ShopPage from "./pages/ShopPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
+import ShopPage from "./pages/ShopPage/ShopPage";
+import ProductDetailPage from "./pages/ProductPage/ProductDetailPage";
 
 function App() {
   return (
