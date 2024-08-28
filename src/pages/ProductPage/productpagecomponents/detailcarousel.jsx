@@ -36,7 +36,7 @@ export default function DetailCarousel() {
       <Carousel
         ref={carouselRef}
         setApi={setApi}
-        className="w-2/3"
+        className="w-2/3 lg:w-full"
         index={currentIndex}
         setIndex={setCurrentIndex}
         opts={{
@@ -46,7 +46,7 @@ export default function DetailCarousel() {
         <CarouselContent>
           {images.map((src, index) => (
             <CarouselItem key={index}>
-              <div className="relative aspect-square w-full">
+              <div className="relative aspect-square w-full lg:aspect-auto">
                 <img
                   src={src}
                   alt={`Furniture image ${index + 1}`}
@@ -66,7 +66,7 @@ export default function DetailCarousel() {
         />
       </Carousel>
 
-      <div className="mt-4 flex justify-center space-x-2">
+      <div className="mt-2 flex justify-center space-x-2">
         {images.map((src, index) => (
           <button
             key={index}

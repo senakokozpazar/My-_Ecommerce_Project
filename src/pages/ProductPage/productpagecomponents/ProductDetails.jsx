@@ -14,19 +14,23 @@ export default function ProductDetails() {
           10 Reviews
         </p>
       </div>
-      <div>
-        <p>$1,139.33</p>
-        <p>
-          Availability: <span>In Stock</span>
+      <div className="flex flex-col gap-2 p-10">
+        <p className="text-2xl font-semibold leading-[32px] tracking-[0.1]">
+          $1,139.33
         </p>
-        <p>
+        <p className="text-sm font-semibold">
+          Availability: <span className="text-[#23A6F0]">In Stock</span>
+        </p>
+        <p className="mb-5 mt-10 w-3/4 text-justify">
           Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
           RELIT official consequent door ENIM RELIT Moille. Excitation venial
           consequent sent nostrum met.
         </p>
         <hr></hr>
       </div>
-      <ColorCircle />
+      <div className="mt-1 flex justify-start p-10 pt-0">
+        <ColorCircle />
+      </div>
     </div>
   );
 }

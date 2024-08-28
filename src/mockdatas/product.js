@@ -98,4 +98,76 @@ export const products = [
     newPrice: "$6.48",
    
   },
+  {
+    id: 12,
+    imageSrc: "/bestsellers/product-cover-16.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 13,
+    imageSrc: "/bestsellers/product-cover-17.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 14,
+    imageSrc: "/bestsellers/product-cover-18.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 15,
+    imageSrc: "/bestsellers/product-cover-19.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 16,
+    imageSrc: "/bestsellers/product-cover-20.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 17,
+    imageSrc: "/bestsellers/product-cover-21.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 18,
+    imageSrc: "/bestsellers/product-cover-22.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
+  {
+    id: 19,
+    imageSrc: "/bestsellers/product-cover-23.png",
+    title: "Graphic Design",
+    subtitle: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+   
+  },
 ];

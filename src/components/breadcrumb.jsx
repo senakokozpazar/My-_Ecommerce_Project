@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function BreadCrumb() {
   return (
-    <ul className="flex items-center justify-center gap-5 p-10 tracking-[0.2px]">
+    <ul className="flex items-center justify-center gap-5 p-10 tracking-[0.2px] lg:mx-20 lg:justify-start">
       <NavLink
         to="/"
         exact
