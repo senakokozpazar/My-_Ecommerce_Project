@@ -2,6 +2,7 @@ import { products } from "@/mockdatas/product";
 import { Button } from "../../../components/ui/button";
 import { productimages } from "@/mockdatas/productimages";
 import { Link } from "react-router-dom";
+import ColorCircle from "@/components/ColorCircle";
 
 export default function FilteredProducts() {
   return (
@@ -53,15 +54,7 @@ export default function FilteredProducts() {
                 {product.newPrice}
               </p>
             </div>
-            <div className="mt-4 flex justify-center space-x-2">
-              {product.colors.map((color, index) => (
-                <div
-                  key={index}
-                  className="h-6 w-6 rounded-full"
-                  style={{ backgroundColor: color }}
-                ></div>
-              ))}
-            </div>
+            <ColorCircle />
           </div>
         </Link>
       ))}

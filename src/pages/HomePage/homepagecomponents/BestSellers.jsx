@@ -1,3 +1,4 @@
+import ColorCircle from "@/components/ColorCircle";
 import { products } from "@/mockdatas/product";
 
 export default function BestSellers() {
@@ -34,15 +35,7 @@ export default function BestSellers() {
               {product.newPrice}
             </p>
           </div>
-          <div className="mt-4 flex justify-center space-x-2">
-            {product.colors.map((color, index) => (
-              <div
-                key={index}
-                className="h-6 w-6 rounded-full"
-                style={{ backgroundColor: color }}
-              ></div>
-            ))}
-          </div>
+          <ColorCircle />
         </div>
       ))}
       <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-3">
@@ -70,15 +63,7 @@ export default function BestSellers() {
                 {product.newPrice}
               </p>
             </div>
-            <div className="mt-4 flex justify-center space-x-2">
-              {product.colors.map((color, index) => (
-                <div
-                  key={index}
-                  className="h-6 w-6 rounded-full"
-                  style={{ backgroundColor: color }}
-                ></div>
-              ))}
-            </div>
+            <ColorCircle />
           </div>
         ))}
       </div>

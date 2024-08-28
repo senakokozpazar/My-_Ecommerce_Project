@@ -36,7 +36,7 @@ export default function DetailCarousel() {
       <Carousel
         ref={carouselRef}
         setApi={setApi}
-        className="w-1/2"
+        className="w-2/3"
         index={currentIndex}
         setIndex={setCurrentIndex}
         opts={{
@@ -72,7 +72,7 @@ export default function DetailCarousel() {
             key={index}
             onClick={() => handleThumbnailClick(index)}
             className={cn(
-              "h-16 w-16 overflow-hidden rounded-md border-2",
+              "h-32 w-32 overflow-hidden rounded-md border-2",
               currentIndex === index ? "border-gray-400" : "border-transparent",
             )}
           >
