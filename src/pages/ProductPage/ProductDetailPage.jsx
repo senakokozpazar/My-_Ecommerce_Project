@@ -1,5 +1,5 @@
 import BreadCrumb from "@/components/breadcrumb";
-import DetailCarousel from "@/components/detailcarousel";
+import DetailCarousel from "@/pages/ProductPage/productpagecomponents/detailcarousel";
 
 export default function ProductDetailPage() {
   return (

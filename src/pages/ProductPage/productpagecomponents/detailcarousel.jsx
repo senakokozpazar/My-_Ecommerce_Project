@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,13 +14,34 @@ export default function DetailCarousel() {
     "/detailcarousel/single-product-1-thumb-1.jpg",
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [api, setApi] = useState(null);
+  const carouselRef = useRef(null);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    api.on("select", () => {
+      setCurrentIndex(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  const handleThumbnailClick = (index) => {
+    setCurrentIndex(index);
+    api?.scrollTo(index);
+  };
 
   return (
     <div className="mx-10 mt-20 flex w-full max-w-3xl flex-col items-center justify-center">
       <Carousel
+        ref={carouselRef}
+        setApi={setApi}
         className="w-1/2"
         index={currentIndex}
         setIndex={setCurrentIndex}
+        opts={{
+          loop: true,
+        }}
       >
         <CarouselContent>
           {images.map((src, index) => (
@@ -49,7 +70,7 @@ export default function DetailCarousel() {
         {images.map((src, index) => (
           <button
             key={index}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => handleThumbnailClick(index)}
             className={cn(
               "h-16 w-16 overflow-hidden rounded-md border-2",
               currentIndex === index ? "border-gray-400" : "border-transparent",
