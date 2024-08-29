@@ -1,19 +1,21 @@
 export default function ContactContainer() {
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center text-[#252B42]">
       <div>
-        <p>CONTACT US</p>
+        <p className="mb-10 text-base font-semibold">CONTACT US</p>
       </div>
       <div>
-        <p>Get in touch today!</p>
+        <p className="p-5 text-center text-[40px] font-semibold leading-[50px]">
+          Get in touch today!
+        </p>
       </div>
       <div>
-        <p>
+        <p className="p-10 text-center">
           We know how large objects will act, but things on a small scale just
           do not act that way.
         </p>
       </div>
-      <div>
+      <div className="flex flex-col items-center justify-center gap-2 text-2xl font-semibold">
         <p>Phone: +451 215 215</p>
         <p>Fax: +451 215 215</p>
       </div>
