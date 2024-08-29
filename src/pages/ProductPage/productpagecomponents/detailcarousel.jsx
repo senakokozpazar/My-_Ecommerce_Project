@@ -46,18 +46,18 @@ export default function DetailCarousel() {
         <CarouselContent>
           {images.map((src, index) => (
             <CarouselItem key={index}>
-              <div className="relative aspect-square w-full lg:aspect-auto">
+              <div className="relative aspect-square w-full lg:flex lg:aspect-auto lg:justify-center">
                 <img
                   src={src}
                   alt={`Furniture image ${index + 1}`}
-                  className="flex h-[277px] w-[348px] object-cover"
+                  className="flex h-[277px] w-[348px] object-cover lg:h-[450px] lg:w-[506px]"
                 />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
         <CarouselPrevious
-          className="absolute left-2 top-1/2 -translate-y-1/2 border-none text-white"
+          className="absolute left-2 top-1/2 -translate-y-1/2 border-none text-white lg:left-7"
           noBackground="true"
         />
         <CarouselNext

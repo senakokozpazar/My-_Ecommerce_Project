@@ -13,12 +13,19 @@ export default function ProductDetailPage() {
       <div className="bg-[#FAFAFA]">
         {" "}
         <BreadCrumb />
-        <DetailCarousel />
-        <ProductDetails />
-        <ProductActions />
+        <div className="flex flex-col lg:flex-row">
+          <DetailCarousel />
+          <div>
+            <ProductDetails />
+            <ProductActions />
+          </div>
+        </div>
       </div>
-      <ProductNavbar />
-      <Detail />
+      <div className="lg:bg-striped lg:flex-col lg:gap-5">
+        <ProductNavbar />
+        <Detail />
+      </div>
+
       <BestSellerProducts />
       <Brands />
     </div>

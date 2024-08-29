@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 export default function ProductNavbar() {
   return (
-    <nav className="flex items-center justify-center p-10">
-      <ul className="flex gap-2">
+    <nav className="flex items-center justify-center p-10 lg:justify-around lg:gap-10">
+      <ul className="flex gap-2 lg:gap-10">
         <li>
           <NavLink
             to="#"

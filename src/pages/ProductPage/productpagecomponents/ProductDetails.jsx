@@ -4,7 +4,7 @@ import StarRate from "./starRate";
 export default function ProductDetails() {
   return (
     <div className="flex flex-col justify-start font-montserrat">
-      <p className="mx-10 mt-10 text-xl leading-[30px] tracking-[0.2]">
+      <p className="mx-10 mt-10 text-xl leading-[30px] tracking-[0.2] lg:mt-36">
         Floating Phone
       </p>
 
