@@ -12,27 +12,34 @@ export default function ContactTypes() {
           We help small businesses with big ideas
         </p>
       </div>
-      <ContactCard
-        bgColor=""
-        textColor=""
-        imgSrc="/contactimages/icn settings .icn-xl.png"
-      />
-      <ContactCard
-        bgColor="bg-[#252B42]"
-        textColor="text-white"
-        imgSrc="/contactimages/Vector.png"
-      />
+      <div className="lg:flex lg:flex-row">
+        <ContactCard
+          bgColor=""
+          textColor=""
+          imgSrc="/contactimages/icn settings .icn-xl.png"
+        />
+        <ContactCard
+          bgColor="bg-[#252B42]"
+          textColor="text-white"
+          imgSrc="/contactimages/Vector.png"
+        />
 
-      <ContactCard bgColor="" textColor="" imgSrc="/contactimages/ok.png" />
+        <ContactCard bgColor="" textColor="" imgSrc="/contactimages/ok.png" />
+      </div>
+
       <div className="m-5 flex flex-col gap-7">
         <div className="flex items-center justify-center">
           {" "}
           <img src="/contactimages/Arrow 2.png" alt="ok" />
         </div>
 
-        <p>WE CAN'T WAIT TO MEET YOU</p>
-        <p>Let's Talk</p>
-        <Button>Try it free now</Button>
+        <p className="mb-7 text-center text-base font-semibold">
+          WE CAN'T WAIT TO MEET YOU
+        </p>
+        <p className="mb-10 text-center text-[58px] font-semibold leading-[80px] tracking-[0.2]">
+          Let's Talk
+        </p>
+        <Button className="bg-[#23A6F0]">Try it free now</Button>
       </div>
     </div>
   );
