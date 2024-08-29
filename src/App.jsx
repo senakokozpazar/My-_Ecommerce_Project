@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import PageContent from "./layout/PageContent";
 import ShopPage from "./pages/ShopPage/ShopPage";
 import ProductDetailPage from "./pages/ProductPage/ProductDetailPage";
+import ContactPage from "./pages/ContactPage/ContactPage";
 
 function App() {
   return (
@@ -24,6 +25,11 @@ function App() {
         <Route path="/product/:id" exact>
           <PageContent>
             <ProductDetailPage />
+          </PageContent>
+        </Route>
+        <Route path="/contact">
+          <PageContent>
+            <ContactPage />
           </PageContent>
         </Route>
       </Switch>
