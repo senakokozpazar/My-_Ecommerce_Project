@@ -8,6 +8,7 @@ import ShopPage from "./pages/ShopPage/ShopPage";
 import ProductDetailPage from "./pages/ProductPage/ProductDetailPage";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import TeamPage from "./pages/TeamPage/TeamPage";
+import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
 
 function App() {
   return (
@@ -36,6 +37,11 @@ function App() {
         <Route path="/team">
           <PageContent>
             <TeamPage />
+          </PageContent>
+        </Route>
+        <Route path="/aboutus">
+          <PageContent>
+            <AboutUsPage />
           </PageContent>
         </Route>
       </Switch>
