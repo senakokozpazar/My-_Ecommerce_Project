@@ -67,7 +67,25 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .active_link {
+    @apply font-normal;
+  }
 
-.active_link {
-  @apply font-normal;
+  .bg-striped {
+    @apply bg-transparent;
+  }
+
+  @screen lg {
+    .bg-striped {
+      background: repeating-linear-gradient(
+        to right,
+        rgba(255, 112, 112, 0.1) 0px,
+        rgba(255, 112, 112, 0.1) 20px,
+        transparent 20px,
+        transparent 40px
+      );
+      background-size: 60px 60px;
+    }
+  }
 }

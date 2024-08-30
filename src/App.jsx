@@ -2,9 +2,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import PageContent from "./layout/PageContent";
-import ShopPage from "./pages/ShopPage";
+import ShopPage from "./pages/ShopPage/ShopPage";
+import ProductDetailPage from "./pages/ProductPage/ProductDetailPage";
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
         <Route path="/shop">
           <PageContent>
             <ShopPage />
+          </PageContent>
+        </Route>
+        <Route path="/product/:id" exact>
+          <PageContent>
+            <ProductDetailPage />
           </PageContent>
         </Route>
       </Switch>

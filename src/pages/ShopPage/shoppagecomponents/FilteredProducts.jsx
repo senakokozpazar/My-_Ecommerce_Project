@@ -1,6 +1,8 @@
 import { products } from "@/mockdatas/product";
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import { productimages } from "@/mockdatas/productimages";
+import { Link } from "react-router-dom";
+import ColorCircle from "@/components/ColorCircle";
 
 export default function FilteredProducts() {
   return (
@@ -28,39 +30,33 @@ export default function FilteredProducts() {
       </div>
       {/* Mobile  */}
       {products.slice(0, 4).map((product) => (
-        <div
-          key={product.id}
-          className="m-10 flex flex-col items-center justify-center gap-3 lg:hidden"
-        >
-          <img
-            src={product.imageSrc}
-            alt={product.title}
-            className="h-[427px] w-[348px] lg:h-[223px] lg:w-[205px]"
-          />
-          <p className="mt-4 text-center text-base font-semibold">
-            {product.title}
-          </p>
-          <p className="text-center text-sm font-semibold text-gray-500">
-            {product.subtitle}
-          </p>
-          <div className="mt-2 flex items-center justify-center">
-            <p className="mr-2 text-base font-semibold text-[#BDBDBD]">
-              {product.oldPrice}
+        <Link key={product.id} to={`/product/${product.id}`} className="block">
+          <div
+            key={product.id}
+            className="m-10 flex flex-col items-center justify-center gap-3 lg:hidden"
+          >
+            <img
+              src={product.imageSrc}
+              alt={product.title}
+              className="h-[427px] w-[348px] lg:h-[223px] lg:w-[205px]"
+            />
+            <p className="mt-4 text-center text-base font-semibold">
+              {product.title}
             </p>
-            <p className="text-base font-semibold text-[#23856D]">
-              {product.newPrice}
+            <p className="text-center text-sm font-semibold text-gray-500">
+              {product.subtitle}
             </p>
+            <div className="mt-2 flex items-center justify-center">
+              <p className="mr-2 text-base font-semibold text-[#BDBDBD]">
+                {product.oldPrice}
+              </p>
+              <p className="text-base font-semibold text-[#23856D]">
+                {product.newPrice}
+              </p>
+            </div>
+            <ColorCircle />
           </div>
-          <div className="mt-4 flex justify-center space-x-2">
-            {product.colors.map((color, index) => (
-              <div
-                key={index}
-                className="h-6 w-6 rounded-full"
-                style={{ backgroundColor: color }}
-              ></div>
-            ))}
-          </div>
-        </div>
+        </Link>
       ))}
       {/* Desktop  */}
       <div className="hidden items-center justify-center lg:flex lg:flex-wrap">
@@ -69,11 +65,13 @@ export default function FilteredProducts() {
             key={image.id}
             className="m-10 w-1/4 flex-col items-center justify-center gap-1"
           >
-            <img
-              src={image.imageSrc}
-              alt={image.title}
-              className="h-[427px] w-[348px]"
-            />
+            <Link key={image.id} to={`/product/${image.id}`}>
+              <img
+                src={image.imageSrc}
+                alt={image.title}
+                className="h-[427px] w-[348px]"
+              />
+            </Link>
             <p className="mt-4 text-center text-base font-semibold">
               {image.title}
             </p>

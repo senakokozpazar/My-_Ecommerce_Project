@@ -32,12 +32,12 @@ export default function Footer() {
 
   const location = useLocation();
   return (
-    <div className="mx-5 flex flex-col items-center font-montserrat lg:mx-0">
+    <div className="mx-0 flex flex-col items-center px-5 font-montserrat lg:mx-0">
       <div
-        className={`mt-52 flex w-full flex-col ${location.pathname === "/shop" ? "bg-white" : "bg-[#FAFAFA]"} lg:mx-0 lg:flex-row lg:justify-between lg:px-0`}
+        className={`mx-0 mt-52 flex w-full flex-col ${location.pathname === "/shop" ? "bg-white" : "bg-[#FAFAFA]"} lg:mx-0 lg:flex-row lg:justify-between lg:px-0`}
       >
         <img
-          src="navbar-brand.png"
+          src="/navbar-brand.png"
           className="m-5 h-[58px] w-[187px] lg:ml-28"
         />
         <div className="m-5 flex justify-start gap-5 lg:items-center lg:justify-center">

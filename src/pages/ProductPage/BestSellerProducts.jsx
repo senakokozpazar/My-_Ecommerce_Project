@@ -1,20 +1,14 @@
 import { products } from "@/mockdatas/product";
 
-export default function BestSellers() {
-  const filteredProducts = products.filter((_, index) =>
-    [0, 1, 2, 3, 7, 8, 9, 10].includes(index),
-  );
-
+export default function BestSellerProducts() {
+  const lgBestSellers = products.slice(11);
   return (
     <div className="mx-5 flex flex-col items-center font-montserrat">
-      <p className="mt-24">Featured Products</p>
-      <h2 className="m-5 max-w-48 text-center text-2xl font-bold leading-[32px] tracking-[0.1px] lg:max-w-96">
+      <h2 className="m-5 text-center text-2xl font-bold leading-[32px] tracking-[0.1px] lg:max-w-96">
         BESTSELLERS PRODUCTS
       </h2>
-      <p className="max-w-48 text-center text-sm font-light leading-[20px] tracking-[0.2px] text-[#737373] lg:mb-10 lg:max-w-96">
-        Problems trying to resolve the conflict between
-      </p>
-      {products.slice(0, 6).map((product) => (
+
+      {products.slice(11, 15).map((product) => (
         <div
           key={product.id}
           className="m-10 flex flex-col items-center justify-center gap-3 lg:hidden"
@@ -34,28 +28,17 @@ export default function BestSellers() {
               {product.newPrice}
             </p>
           </div>
-          <div className="mt-4 flex justify-center space-x-2">
-            {product.colors.map((color, index) => (
-              <div
-                key={index}
-                className="h-6 w-6 rounded-full"
-                style={{ backgroundColor: color }}
-              ></div>
-            ))}
-          </div>
         </div>
       ))}
-      <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-3">
-        {filteredProducts.map((product) => (
+
+      {/* Desktop */}
+      <div className="hidden lg:mb-10 lg:grid lg:grid-cols-4 lg:gap-10">
+        {lgBestSellers.map((product) => (
           <div
             key={product.id}
-            className="my-5 mb-24 flex-col justify-center gap-3"
+            className="flex flex-col items-center justify-center gap-3"
           >
-            <img
-              src={product.imageSrc}
-              alt={product.title}
-              className="h-[427px] w-[239px]"
-            />
+            <img src={product.imageSrc} alt={product.title} />
             <p className="mt-4 text-center text-base font-semibold">
               {product.title}
             </p>
@@ -69,15 +52,6 @@ export default function BestSellers() {
               <p className="text-base font-semibold text-[#23856D]">
                 {product.newPrice}
               </p>
-            </div>
-            <div className="mt-4 flex justify-center space-x-2">
-              {product.colors.map((color, index) => (
-                <div
-                  key={index}
-                  className="h-6 w-6 rounded-full"
-                  style={{ backgroundColor: color }}
-                ></div>
-              ))}
             </div>
           </div>
         ))}
