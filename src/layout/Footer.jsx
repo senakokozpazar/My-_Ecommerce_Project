@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useLocation } from "react-router-dom";
 
 export default function Footer() {
   const infoSections = [
@@ -28,9 +29,13 @@ export default function Footer() {
       links: ["IOS & Android", "Watch a Demo", "Customers", "API"],
     },
   ];
+
+  const location = useLocation();
   return (
     <div className="mx-5 flex flex-col items-center font-montserrat lg:mx-0">
-      <div className="mt-52 flex w-full flex-col bg-[#FAFAFA] lg:mx-0 lg:flex-row lg:justify-between lg:px-0">
+      <div
+        className={`mt-52 flex w-full flex-col ${location.pathname === "/shop" ? "bg-white" : "bg-[#FAFAFA]"} lg:mx-0 lg:flex-row lg:justify-between lg:px-0`}
+      >
         <img
           src="navbar-brand.png"
           className="m-5 h-[58px] w-[187px] lg:ml-28"

@@ -1,10 +1,15 @@
+import { useLocation, Link, NavLink } from "react-router-dom";
+
 export default function Header() {
+  const location = useLocation();
   return (
     <>
       {/*Desktop Header */}
 
       <div className="sticky top-0 z-10 m-0 hidden flex-col p-0 lg:block">
-        <div className="flex h-[46px] items-center justify-between bg-[#252B42] text-sm font-semibold leading-[24px] tracking-[0.2px] text-white">
+        <div
+          className={`flex h-[46px] items-center justify-between ${location.pathname === "/shop" ? "bg-[#23856D]" : "bg-[#252B42]"} text-sm font-semibold leading-[24px] tracking-[0.2px] text-white`}
+        >
           <div className="flex gap-5">
             <div>
               <i className="fa-solid fa-phone p-2 text-white"></i>
@@ -16,7 +21,7 @@ export default function Header() {
             </div>
           </div>
           <div>
-            <p>Follow Us and get a chance to win ½80 off</p>
+            <p>Follow Us and get a chance to win 80% off</p>
           </div>
           <div className="m-3 flex gap-3">
             <p>Follow Us : </p>
@@ -46,17 +51,54 @@ export default function Header() {
           <div className="flex gap-5">
             <img src="/navbar-brand.png" className="p-2" />
             <ul className="flex items-center gap-5 text-[#737373]">
-              <li>Home</li>
-              <li className="font-normal">Shop</li>
-              <li>About</li>
-              <li>Blog</li>
-              <li>Contact</li>
-              <li>Pages</li>
+              <NavLink
+                to="/"
+                exact
+                activeClassName="active_link"
+                className="font-semibold"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/shop"
+                activeClassName="active_link"
+                className="font-semibold"
+              >
+                Shop
+              </NavLink>
+              <NavLink
+                to="/about"
+                activeClassName="active_link"
+                className="font-semibold"
+              >
+                About
+              </NavLink>
+              <NavLink
+                to="/blog"
+                activeClassName="active_link"
+                className="font-semibold"
+              >
+                Blog
+              </NavLink>
+              <NavLink
+                to="/contact"
+                activeClassName="active_link"
+                className="font-semibold"
+              >
+                Contact
+              </NavLink>
+              <NavLink
+                to="/pages"
+                activeClassName="active_link"
+                className="font-semibold"
+              >
+                Pages
+              </NavLink>
             </ul>
           </div>
           <div className="m-2 flex items-center gap-2 text-[#23A6F0]">
             <i className="fa-regular fa-user p-2"></i>
-            <p>Login / Register</p>
+            <Link to="/login">Login / Register</Link>
             <i class="fa-solid fa-magnifying-glass"></i>
             <i class="fa-solid fa-cart-shopping"></i>
             <span className="font-normal">1</span>
@@ -78,14 +120,114 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="font-2xl m-10 flex justify-center p-5 text-center text-xl font-normal leading-[45px] tracking-[0.2px]">
-          <ul className="text-[#737373]">
-            <li>Home</li>
-            <li className="font-semibold">Product</li>
-            <li className="font-semibold">Pricing</li>
-            <li className="font-semibold">Contact</li>
+        <div className="font-2xl m-10 justify-center p-5 text-center text-xl font-normal leading-[45px] tracking-[0.2px]">
+          <ul className="flex flex-col text-[#737373]">
+            {location.pathname === "/shop" ? (
+              <>
+                <NavLink
+                  exact
+                  to="/"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to="/shop"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Shop
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  About
+                </NavLink>
+                <NavLink
+                  to="/blog"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Blog
+                </NavLink>
+                <NavLink
+                  to="/contact"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Contact
+                </NavLink>
+                <NavLink
+                  to="/pages"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Pages
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  exact
+                  to="/"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to="/product"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Product
+                </NavLink>
+                <NavLink
+                  to="/pricing"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Pricing
+                </NavLink>
+                <NavLink
+                  to="/contact"
+                  activeClassName="active_link"
+                  className="font-semibold"
+                >
+                  Contact
+                </NavLink>
+              </>
+            )}
           </ul>
         </div>
+
+        {location.pathname === "/shop" && (
+          <div className="flex flex-col gap-2 font-montserrat">
+            <div className="flex flex-col items-center gap-5 text-[#23A6F0]">
+              <div className="flex items-center justify-center font-semibold">
+                <i className="fa-regular fa-user p-2"></i>
+                <Link to="/login">Login / Register</Link>
+              </div>
+
+              <div className="flex items-center justify-center gap-2 font-semibold">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </div>
+
+              <div className="flex items-center justify-center gap-2 font-semibold">
+                <i className="fa-solid fa-cart-shopping"></i>
+                <span className="font-normal">1</span>
+              </div>
+
+              <div className="flex items-center justify-center gap-2 font-semibold">
+                <i className="fa-regular fa-heart"></i>
+                <span className="font-normal">1</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

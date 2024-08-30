@@ -1,106 +1,6 @@
-export default function BestSellers() {
-  const products = [
-    {
-      id: 1,
-      imageSrc: "/bestsellers/product-cover-5.png",
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 2,
-      imageSrc: "/bestsellers/product-cover-6.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 3,
-      imageSrc: "/bestsellers/product-cover-7.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 4,
-      imageSrc: "/bestsellers/product-cover-8.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 5,
-      imageSrc: "/bestsellers/product-cover-9.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 6,
-      imageSrc: "/bestsellers/product-cover-10.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 7,
-      imageSrc: "/bestsellers/product-cover-11.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 8,
-      imageSrc: "/bestsellers/product-cover-12.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 9,
-      imageSrc: "/bestsellers/product-cover-13.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 10,
-      imageSrc: "/bestsellers/product-cover-14.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-    {
-      id: 11,
-      imageSrc: "/bestsellers/product-cover-15.png",
-      title: "Graphic Design",
-      subtitle: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#252B42"],
-    },
-  ];
+import { products } from "@/mockdatas/product";
 
+export default function BestSellers() {
   const filteredProducts = products.filter((_, index) =>
     [0, 1, 2, 3, 7, 8, 9, 10].includes(index),
   );
@@ -117,7 +17,7 @@ export default function BestSellers() {
       {products.slice(0, 6).map((product) => (
         <div
           key={product.id}
-          className="m-10 flex flex-col justify-center gap-3 lg:hidden"
+          className="m-10 flex flex-col items-center justify-center gap-3 lg:hidden"
         >
           <img src={product.imageSrc} alt={product.title} />
           <p className="mt-4 text-center text-base font-semibold">
