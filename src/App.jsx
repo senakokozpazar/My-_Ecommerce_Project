@@ -7,6 +7,7 @@ import PageContent from "./layout/PageContent";
 import ShopPage from "./pages/ShopPage/ShopPage";
 import ProductDetailPage from "./pages/ProductPage/ProductDetailPage";
 import ContactPage from "./pages/ContactPage/ContactPage";
+import TeamPage from "./pages/TeamPage/TeamPage";
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
         <Route path="/contact">
           <PageContent>
             <ContactPage />
+          </PageContent>
+        </Route>
+        <Route path="/team">
+          <PageContent>
+            <TeamPage />
           </PageContent>
         </Route>
       </Switch>
