@@ -4,28 +4,44 @@ import TeamCards from "@/pages/TeamPage/teampagecomponents/TeamCards";
 export default function AboutUsContainer() {
   return (
     <div className="flex flex-col items-center justify-center font-montserrat">
-      <p className="text[40px] font-semibold leading-[50px] tracking-[0.2]">
-        ABOUT US
-      </p>
-      <p className="max-w-80 p-10 text-center">
-        We know how large objects will act, but things on a small scale just do
-        not act that way.
-      </p>
-      <Button size="lg" className="m-10 bg-[#23A6F0] text-white">
-        Get Quote Now
-      </Button>
-      <div className="m-3 mb-20 flex items-center justify-center p-5">
-        <img src="/aboutus.png" />
+      <div className="flex flex-col items-center justify-center lg:flex-row lg:gap-10">
+        <div className="flex flex-col items-center justify-center">
+          {" "}
+          <p className="text-[40px] font-semibold leading-[50px] tracking-[0.2] lg:text-left lg:text-[58px] lg:leading-[80px]">
+            ABOUT US
+          </p>
+          <p className="max-w-80 p-10 text-center lg:text-left">
+            We know how large objects will act, but things on a small scale just
+            do not act that way.
+          </p>
+          <Button size="lg" className="m-10 bg-[#23A6F0] text-white">
+            Get Quote Now
+          </Button>
+        </div>
+
+        <div className="m-3 mb-20 flex items-center justify-center p-5">
+          <img src="/aboutus.png" />
+        </div>
       </div>
-      <p className="m-5 text-sm text-[#E74040]">Problems trying</p>
-      <p className="max-w-80 p-10 text-center text-2xl font-semibold">
-        Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
-      </p>
-      <p className="m-5 max-w-80 p-10 text-center text-sm font-light">
-        Problems trying to resolve the conflict between the two major realms of
-        Classical physics: Newtonian mechanics{" "}
-      </p>
-      <div className="m-3 flex flex-col items-center justify-center gap-10 p-5">
+      <div className="flex flex-col items-center justify-center lg:w-full lg:flex-row lg:p-20">
+        <div>
+          <p className="m-5 text-center text-sm text-[#E74040] lg:mb-2 lg:ml-10 lg:text-left">
+            Problems trying
+          </p>
+          <p className="max-w-80 p-10 text-center text-2xl font-semibold lg:m-0 lg:max-w-xl lg:text-left">
+            Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
+          </p>
+        </div>
+        <div>
+          {" "}
+          <p className="m-5 max-w-80 p-10 text-center text-sm font-light lg:m-0 lg:mt-10 lg:max-w-xl">
+            Problems trying to resolve the conflict between the two major realms
+            of Classical physics: Newtonian mechanics{" "}
+          </p>
+        </div>
+      </div>
+
+      <div className="m-3 flex flex-col items-center justify-center gap-10 p-5 lg:flex-row lg:justify-between">
         <div className="p-5">
           {" "}
           <p className="mb-3 text-center text-[58px] font-semibold leading-[80px] tracking-[0.2]">
@@ -55,8 +71,11 @@ export default function AboutUsContainer() {
           <p className="text-base font-semibold">Top Partners</p>
         </div>
       </div>
-      <div className="relative mb-10">
-        <img src="/media bg-cover.png" className="rounded-lg" />
+      <div className="relative mb-10 lg:w-2/3">
+        <img
+          src="/media bg-cover.png"
+          className="rounded-lg lg:h-96 lg:w-full lg:object-cover"
+        />
         <button className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#23A6F0] p-3">
           <i className="fa-solid fa-play text-white"></i>
         </button>
