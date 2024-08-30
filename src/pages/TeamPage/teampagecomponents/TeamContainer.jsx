@@ -11,22 +11,25 @@ export default function TeamContainer() {
         </p>
         <BreadCrumb />
       </div>
-      <div className="mx-10 flex flex-col items-center justify-center">
-        <div>
-          <img src="/teampage/red.png" />
+      <div className="mx-10 flex flex-col items-center justify-center gap-3 lg:mx-0 lg:mb-20 lg:ml-24 lg:w-full lg:flex-row lg:gap-5 lg:p-5">
+        <div className="lg:aspect-video lg:w-full">
+          <img src="/teampage/red.png" className="lg:h-[530px] lg:w-[700px]" />
         </div>
-        <div className="m-auto my-5 flex flex-wrap gap-2">
-          <div>
-            <img src="/teampage/cream.png" />
+        <div className="m-auto my-5 flex flex-wrap gap-2 lg:m-0 lg:w-full">
+          <div className="lg:w-1/3">
+            <img
+              src="/teampage/cream.png"
+              className="lg:h-[260px] lg:w-[361px]"
+            />
           </div>
-          <div>
-            <img src="/teampage/2.png" />
+          <div className="lg:w-1/3">
+            <img src="/teampage/2.png" className="lg:h-[260px] lg:w-[361px]" />
           </div>
-          <div>
-            <img src="/teampage/3.png" />
+          <div className="lg:w-1/3">
+            <img src="/teampage/3.png" className="lg:h-[260px] lg:w-[361px]" />
           </div>
-          <div>
-            <img src="/teampage/4.png" />
+          <div className="lg:w-1/3">
+            <img src="/teampage/4.png" className="lg:h-[260px] lg:w-[361px]" />
           </div>
         </div>
       </div>

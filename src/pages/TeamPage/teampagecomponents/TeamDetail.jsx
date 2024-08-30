@@ -7,24 +7,26 @@ export default function TeamDetail() {
       <p className="m-5 w-1/2 text-center text-[40px] leading-[50px] text-[#252B42]">
         Meet Our Team
       </p>
+      <div className="lg:flex">
+        {" "}
+        <TeamCards
+          username="Erhan Fırat"
+          image="/teampage/1708951317641.jpeg"
+          profession="Project Owner"
+        />
+        <TeamCards
+          username="Gökhan Özdemir"
+          image="/teampage/1635783306921.jpeg"
+          profession="Scrum Master "
+        />
+        <TeamCards
+          username="Sena Kokoz Pazar"
+          image="/teampage/me.jpeg"
+          profession="Full Stack Developer"
+        />
+      </div>
 
-      <TeamCards
-        username="Erhan Fırat"
-        image="/teampage/1708951317641.jpeg"
-        profession="Project Owner"
-      />
-      <TeamCards
-        username="Gökhan Özdemir"
-        image="/teampage/1635783306921.jpeg"
-        profession="Scrum Master "
-      />
-      <TeamCards
-        username="Sena Kokoz Pazar"
-        image="/teampage/me.jpeg"
-        profession="Full Stack Developer"
-      />
-
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center lg:mt-20">
         <p className="m-5 w-2/3 text-center text-[40px] leading-[50px] text-[#252B42]">
           Start your 14 days free trial
         </p>
