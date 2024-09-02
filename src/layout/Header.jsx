@@ -68,7 +68,7 @@ export default function Header() {
                 Shop
               </NavLink>
               <NavLink
-                to="/about"
+                to="/aboutus"
                 activeClassName="active_link"
                 className="font-semibold"
               >
@@ -173,7 +173,7 @@ export default function Header() {
                   Shop
                 </NavLink>
                 <NavLink
-                  to="/about"
+                  to="/aboutus"
                   activeClassName="active_link"
                   className="font-semibold"
                 >
