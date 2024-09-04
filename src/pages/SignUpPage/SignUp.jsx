@@ -43,7 +43,7 @@ export const SignUp = () => {
     });
   }, []);
 
-  const handlePostSubmit = async (data) => {
+  const handlePostSubmit = (data) => {
     if (selectedRole !== 2) {
       delete data.store;
     }

@@ -20,19 +20,26 @@ const useAxios = (initialState) => {
 
   const doRequest = ({ reqType, endpoint, payload, config }) => {
     setLoading(true);
+    setError(null);
 
     return axiosInstance[reqType](endpoint, payload, config)
       .then((response) => {
-        return setData(response.data);
+        setData(response.data);
+        return response.data;
       })
       .catch((err) => {
+        let errorMessage = "An unexpected error occurred.";
+
         if (err.response && err.response.data && err.response.data.err) {
-          alert(JSON.stringify(err.response.data.err));
-          setError(err.response.data.err);
+          errorMessage = JSON.stringify(err.response.data.err);
+          alert(errorMessage);
         } else {
-          alert(err.message);
-          setError(err.message);
+          errorMessage = err.message;
+          alert(errorMessage);
         }
+
+        setError(errorMessage);
+        throw new Error(errorMessage);
       })
       .finally(() => setLoading(false));
   };
