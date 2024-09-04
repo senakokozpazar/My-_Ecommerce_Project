@@ -14,6 +14,7 @@ export const SignUp = () => {
   const [storeFields, setStoreFields] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const {
     register,
@@ -41,7 +42,7 @@ export const SignUp = () => {
     try {
       const response = await axiosInstance.get("/roles");
       setRoles(response.data);
-      setSelectedRole(response.data[2]?.id); // Customer rolünü varsayılan olarak seç
+      setSelectedRole(response.data[2]?.id);
     } catch (error) {
       console.error(error);
     }
@@ -55,18 +56,19 @@ export const SignUp = () => {
     setSubmitting(true);
     setError(null);
 
-    // Role Customer veya Admin ise, store alanları kaldırılır
     if (selectedRole !== 2) {
       delete data.store;
     }
 
     try {
       await axiosInstance.post("/signup", {
-        ...data,
         role_id: selectedRole,
+        password: data.password,
+        name: data.name,
+        email: data.email,
       });
       reset();
-      history.push("/login");
+      history.goBack();
       alert(
         "You need to click the link in the email to activate your account!",
       );
@@ -87,6 +89,10 @@ export const SignUp = () => {
     } else {
       setStoreFields(false);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -121,29 +127,52 @@ export const SignUp = () => {
 
       <label>Password:</label>
       <input
-        type="password"
+        type={passwordVisible ? "text" : "password"}
         {...register("password", {
           required: "Password is required",
           pattern: {
             value:
-              /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d@$!%*#?&.]{8,}$/,
+
             message:
               "Password must be at least 8 characters, including numbers, lower case, upper case and special characters",
           },
         })}
         placeholder="Password"
       />
+      <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        className="ml-2 text-sm"
+      >
+        {passwordVisible ? (
+          <i class="fa-solid fa-eye-slash"></i>
+        ) : (
+          <i class="fa-regular fa-eye"></i>
+        )}
+      </button>
       {errors.password && <p>{errors.password.message}</p>}
 
       <label>Confirm Password:</label>
       <input
-        type="password"
+        type={passwordVisible ? "text" : "password"}
         {...register("confirmPassword", {
           required: "Confirm Password is required",
           validate: (value) => value === watch("password"),
         })}
         placeholder="Confirm Password"
       />
+      <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        className="ml-2 text-sm"
+      >
+        {passwordVisible ? (
+          <i class="fa-solid fa-eye-slash"></i>
+        ) : (
+          <i class="fa-regular fa-eye"></i>
+        )}
+      </button>
       {errors.confirmPassword && <p>Passwords do not match</p>}
 
       <label>Role:</label>

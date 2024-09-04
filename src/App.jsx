@@ -9,7 +9,7 @@ import ProductDetailPage from "./pages/ProductPage/ProductDetailPage";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import TeamPage from "./pages/TeamPage/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
-import SignUp from "./components/signUp";
+import SignUp from "./pages/SignUpPage/SignUp";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
             <AboutUsPage />
           </PageContent>
         </Route>
-        <Route path="/signup">
+        <Route path="/login">
           <PageContent>
             <SignUp />
           </PageContent>
