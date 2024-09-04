@@ -1,20 +1,18 @@
+import useAxios, { REQ_TYPES } from "@/hooks/useAxios";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
-const axiosInstance = axios.create({
-  baseURL: "https://workintech-fe-ecommerce.onrender.com",
-});
-
 export const SignUp = () => {
   const history = useHistory();
-  const [roles, setRoles] = useState([]);
   const [selectedRole, setSelectedRole] = useState(null);
   const [storeFields, setStoreFields] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const { doRequest: fetchRoles, data: roles } = useAxios([]);
+
+  const { doRequest: onSubmit, loading: submitting, error } = useAxios([]);
 
   const {
     register,
@@ -38,45 +36,40 @@ export const SignUp = () => {
     },
   });
 
-  const fetchRoles = async () => {
-    try {
-      const response = await axiosInstance.get("/roles");
-      setRoles(response.data);
-      setSelectedRole(response.data[2]?.id);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
-    fetchRoles();
+    fetchRoles({
+      reqType: REQ_TYPES.GET,
+      endpoint: "/roles",
+    });
   }, []);
 
-  const onSubmit = async (data) => {
-    setSubmitting(true);
-    setError(null);
-
+  const handlePostSubmit = async (data) => {
     if (selectedRole !== 2) {
       delete data.store;
     }
 
-    try {
-      await axiosInstance.post("/signup", {
+    onSubmit({
+      reqType: REQ_TYPES.POST,
+      endpoint: "/signup",
+      payload: {
         role_id: selectedRole,
         password: data.password,
         name: data.name,
         email: data.email,
+      },
+    })
+      .then(() => {
+        console.log("Success");
+        reset();
+        history.goBack();
+        alert(
+          "You need to click the link in the email to activate your account!",
+        );
+      })
+      .catch((err) => {
+        alert(err);
+        history.goBack();
       });
-      reset();
-      history.goBack();
-      alert(
-        "You need to click the link in the email to activate your account!",
-      );
-    } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   const handleRoleChange = (event) => {
@@ -97,7 +90,7 @@ export const SignUp = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handlePostSubmit)}
       className="flex flex-col items-center justify-center gap-5"
     >
       <label>Name:</label>
