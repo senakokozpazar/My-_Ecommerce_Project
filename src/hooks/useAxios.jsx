@@ -23,7 +23,7 @@ const useAxios = (initialState) => {
 
     return axiosInstance[reqType](endpoint, payload, config)
       .then((response) => {
-        return setData(response.data);
+        setData(response.data);
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.err) {

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export const SignUp = () => {
   const history = useHistory();
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(3);
   const [storeFields, setStoreFields] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
