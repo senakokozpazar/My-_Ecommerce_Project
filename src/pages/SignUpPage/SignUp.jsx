@@ -1,7 +1,9 @@
 import useAxios, { REQ_TYPES } from "@/hooks/useAxios";
+import { fetchRoles } from "@/redux/clientSlice";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 export const SignUp = () => {
@@ -10,7 +12,7 @@ export const SignUp = () => {
   const [storeFields, setStoreFields] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const { doRequest: fetchRoles, data: roles } = useAxios([]);
+  //const { doRequest: fetchRoles, data: roles } = useAxios([]);
 
   const { doRequest: onSubmit, loading: submitting, error } = useAxios([]);
 
@@ -36,12 +38,18 @@ export const SignUp = () => {
     },
   });
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchRoles({
       reqType: REQ_TYPES.GET,
       endpoint: "/roles",
     });
-  }, []);
+  }, []); */
+
+  const dispatch = useDispatch();
+  const roles = useSelector((state) => state.client.roles || []);
+  useEffect(() => {
+    dispatch(fetchRoles());
+  }, [dispatch]);
 
   const handlePostSubmit = async (data) => {
     if (selectedRole !== 2) {

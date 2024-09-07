@@ -8,15 +8,15 @@ export const REQ_TYPES = Object.freeze({
   DELETE: "delete",
 });
 
+export const axiosInstance = axios.create({
+  baseURL: "https://workintech-fe-ecommerce.onrender.com",
+  timeout: 5000,
+});
+
 const useAxios = (initialState) => {
   const [data, setData] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const axiosInstance = axios.create({
-    baseURL: "https://workintech-fe-ecommerce.onrender.com",
-    timeout: 5000,
-  });
 
   const doRequest = ({ reqType, endpoint, payload, config }) => {
     setLoading(true);
