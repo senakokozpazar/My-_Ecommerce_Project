@@ -22,6 +22,23 @@ export const fetchRoles = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk(
+  'client/login',
+  async ({ email, password, rememberMe }) => {
+    try {
+      const response = await axiosInstance.post('/login', { email, password });
+      const token = response.data.token;
+      if (rememberMe) {
+        localStorage.setItem('token', token);
+      }
+      return response.data;
+    } catch (error) {
+      throw error.response.data.error;
+    }
+  }
+);
+
+
 const clientSlice = createSlice({
   name: 'client',
   initialState,
@@ -57,7 +74,17 @@ const clientSlice = createSlice({
       })
       .addCase(fetchRoles.rejected, (state, action) => {
         state.roles = []; 
+      })
+      .addCase(login.pending, (state) => {
+        state.user = {};
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.user = {};
       });
+     ;
   }
 });
 

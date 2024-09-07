@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import { useLocation, Link, NavLink } from "react-router-dom";
+import Gravatar from "react-gravatar";
 
 export default function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const user = useSelector((state) => state.client.user);
 
   return (
     <>
@@ -98,8 +101,23 @@ export default function Header() {
             </ul>
           </div>
           <div className="m-2 flex items-center gap-2 text-[#23A6F0]">
-            <i className="fa-regular fa-user p-2"></i>
-            <Link to="/login">Login / Register</Link>
+            {user && (
+              <>
+                <Gravatar
+                  email={user.email}
+                  size={30}
+                  className="m-2 rounded-full"
+                />
+                <span className="font-semibold">{user.name}</span>
+              </>
+            )}
+            {!user && (
+              <>
+                <i className="fa-regular fa-user p-2"></i>
+                <Link to="/login">Login</Link> /{" "}
+                <Link to="/register">Register</Link>
+              </>
+            )}
             <i class="fa-solid fa-magnifying-glass"></i>
             <i class="fa-solid fa-cart-shopping"></i>
             <span className="font-normal">1</span>
@@ -202,8 +220,23 @@ export default function Header() {
                 </NavLink>
                 <div className="mt-5 flex flex-col gap-2 text-[#23A6F0]">
                   <div className="flex items-center justify-center font-semibold">
-                    <i className="fa-regular fa-user p-2"></i>
-                    <Link to="/login">Login / Register</Link>
+                    {user && (
+                      <>
+                        <Gravatar
+                          email={user.email}
+                          size={30}
+                          className="m-2 rounded-full"
+                        />
+                        <span className="font-semibold">{user.name}</span>
+                      </>
+                    )}
+                    {!user && (
+                      <>
+                        <i className="fa-regular fa-user p-2"></i>
+                        <Link to="/login">Login</Link> /{" "}
+                        <Link to="/register">Register</Link>
+                      </>
+                    )}
                   </div>
                   <div className="flex items-center justify-center gap-2 font-semibold">
                     <i className="fa-solid fa-magnifying-glass"></i>

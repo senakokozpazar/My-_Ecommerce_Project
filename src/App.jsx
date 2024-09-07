@@ -10,6 +10,7 @@ import ContactPage from "./pages/ContactPage/ContactPage";
 import TeamPage from "./pages/TeamPage/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
 import SignUp from "./pages/SignUpPage/SignUp";
+import Login from "./pages/LoginPage/Login";
 
 function App() {
   return (
@@ -45,9 +46,14 @@ function App() {
             <AboutUsPage />
           </PageContent>
         </Route>
-        <Route path="/login">
+        <Route path="/register">
           <PageContent>
             <SignUp />
+          </PageContent>
+        </Route>
+        <Route path="/login">
+          <PageContent>
+            <Login />
           </PageContent>
         </Route>
       </Switch>
