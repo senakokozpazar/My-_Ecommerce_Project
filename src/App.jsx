@@ -11,8 +11,16 @@ import TeamPage from "./pages/TeamPage/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
 import SignUp from "./pages/SignUpPage/SignUp";
 import Login from "./pages/LoginPage/Login";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { autoLogin } from "./redux/clientSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(autoLogin());
+  }, [dispatch]);
   return (
     <>
       <Switch>

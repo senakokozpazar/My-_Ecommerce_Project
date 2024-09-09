@@ -1,11 +1,19 @@
-import { useSelector } from "react-redux";
-import { useLocation, Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, Link, NavLink, useHistory } from "react-router-dom";
 import Gravatar from "react-gravatar";
+import { logout } from "@/redux/clientSlice";
 
 export default function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const user = useSelector((state) => state.client.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    history.push("/login");
+  };
 
   return (
     <>
@@ -109,6 +117,7 @@ export default function Header() {
                   className="m-2 rounded-full"
                 />
                 <span className="font-semibold">{user.name}</span>
+                <button onClick={handleLogout}>Logout</button>
               </>
             )}
             {!user && (

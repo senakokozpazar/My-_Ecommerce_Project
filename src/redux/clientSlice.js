@@ -31,6 +31,7 @@ export const login = createAsyncThunk(
       if (rememberMe) {
         localStorage.setItem('token', token);
       }
+
       return response.data;
     } catch (error) {
       throw error.response.data.error;
@@ -38,6 +39,41 @@ export const login = createAsyncThunk(
   }
 );
 
+export const autoLogin = createAsyncThunk(
+  'client/autoLogin',
+  async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await axiosInstance.get('/verify', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        const user = response.data;
+        localStorage.setItem('token', user.token);
+        axiosInstance.defaults.headers.common['Authorization'] = user.token;
+        return user;
+      } catch (error) {
+        localStorage.removeItem('token');
+        throw error;
+      }
+    } else {
+    
+      return null;
+    }
+  }
+);
+
+export const logout = createAsyncThunk(
+  'client/logout',
+  async () => {
+    console.log('Logout action dispatched');
+    localStorage.removeItem('token');
+    axiosInstance.defaults.headers.common['Authorization'] = '';
+    return null;
+  }
+);
 
 const clientSlice = createSlice({
   name: 'client',
@@ -62,7 +98,8 @@ const clientSlice = createSlice({
       if (action.payload) {
         state.language = action.payload;
       }
-    }
+    },
+  
   },
   extraReducers: (builder) => {
     builder
@@ -83,8 +120,15 @@ const clientSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.user = {};
-      });
-     ;
+      })
+      .addCase(autoLogin.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.user = action.payload;
+        }})
+        .addCase(logout.fulfilled, (state) => {
+          console.log('Logout fulfilled, setting user to null');
+          state.user = null;
+        });
   }
 });
 
