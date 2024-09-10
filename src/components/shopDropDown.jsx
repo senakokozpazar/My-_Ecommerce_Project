@@ -45,16 +45,46 @@ function ShopDropdown() {
           ) : fetchState?.categories === "FAILED" ? (
             <div>Error fetching categories</div> // or an error message
           ) : (
-            <div className="absolute z-10 mt-2 w-56 origin-top-right bg-white shadow-lg focus:outline-none">
-              <ul>
-                {categories?.map((category) => (
-                  <li key={category.id}>
-                    <NavLink to={`/shop/${category.gender}/${category.title}`}>
-                      {category.title}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+            <div className="absolute mt-2 flex w-full gap-5 bg-white shadow-lg focus:outline-none">
+              {/* Kadın Kategorisi */}
+              <div className="flex bg-white">
+                <div className="p-4">
+                  <h2 className="mb-2 font-bold text-gray-700">Kadın</h2>
+                  <ul>
+                    {categories
+                      ?.filter((category) => category.gender === "k")
+                      .map((category) => (
+                        <li key={category.id} className="mb-2">
+                          <NavLink
+                            to={`/shop/kadın/${category.title.toLowerCase()}`}
+                            className="hover:underline"
+                          >
+                            {category.title}
+                          </NavLink>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+
+                {/* Erkek Kategorisi */}
+                <div className="bg-white p-4">
+                  <h2 className="mb-2 font-bold text-gray-700">Erkek</h2>
+                  <ul>
+                    {categories
+                      ?.filter((category) => category.gender === "e")
+                      .map((category) => (
+                        <li key={category.id} className="mb-2">
+                          <NavLink
+                            to={`/shop/erkek/${category.title}`}
+                            className="hover:underline"
+                          >
+                            {category.title}
+                          </NavLink>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           )}
         </>

@@ -10,7 +10,7 @@ export default function Header() {
   const isHomePage = location.pathname === "/";
   const user = useSelector((state) => {
     console.log(state);
-    return state.user;
+    return state.client.user;
   });
   const dispatch = useDispatch();
   const history = useHistory();
