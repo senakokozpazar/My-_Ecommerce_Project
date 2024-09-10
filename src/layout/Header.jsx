@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link, NavLink, useHistory } from "react-router-dom";
 import Gravatar from "react-gravatar";
-import { logout } from "@/redux/clientSlice";
+import { login, logout } from "@/redux/clientSlice";
 import ShopDropdown from "@/components/shopDropDown";
+import { useEffect } from "react";
 
 export default function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-  const user = useSelector((state) => state.client.user);
+  const user = useSelector((state) => {
+    console.log(state);
+    return state.user;
+  });
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -187,13 +191,7 @@ export default function Header() {
                 >
                   Home
                 </NavLink>
-                <NavLink
-                  to="/shop"
-                  activeClassName="active_link"
-                  className="font-semibold"
-                >
-                  Shop
-                </NavLink>
+                <ShopDropdown />
                 <NavLink
                   to="/aboutus"
                   activeClassName="active_link"

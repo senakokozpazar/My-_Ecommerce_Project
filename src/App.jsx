@@ -14,6 +14,7 @@ import Login from "./pages/LoginPage/Login";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { autoLogin } from "./redux/clientSlice";
+import { fetchCategories } from "./redux/productSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(autoLogin());
   }, [dispatch]);
+
   return (
     <>
       <Switch>

@@ -8,16 +8,16 @@ const initialState = {
   limit: 25,
   offset: 0,
   filter: '',
-  fetchState: 'NOT_FETCHED',
+  fetchState: {categories: 'NOT_FETCHED', productList: 'NOT_FETCHED'},
+  
 };  
 
-export const fetchCategories = createAsyncThunk(
-  'product/fetchCategories',
-  async () => {
-    const response = await axiosInstance.get('/categories');
-    return response.data;
-  }
-);
+export const fetchCategories = createAsyncThunk('product/fetchCategories', async () => {
+  const response = await axiosInstance.get('/categories');
+  console.log(response.data);
+  return response.data;
+
+});
 
 const productSlice = createSlice({
   name: 'product',
@@ -32,9 +32,6 @@ const productSlice = createSlice({
     setTotal: (state, action) => {
       state.total = action.payload;
     },
-    setFetchState: (state, action) => {
-      state.fetchState = action.payload;
-    },
     setLimit: (state, action) => {
       state.limit = action.payload;
     },
@@ -43,24 +40,37 @@ const productSlice = createSlice({
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
+    },
+    setFetchStateCategories: (state, action) => {
+      state.fetchState.categories = action.payload;
+    },
+    setFetchStateProductList: (state, action) => {
+      state.fetchState.productList = action.payload;
     }},
     extraReducers: (builder) => {
       builder
-        .addCase(fetchCategories.fulfilled, (state, action) => {
-          state.categories = action.payload; 
-        })}
-      });
-
-    
+      .addCase(fetchCategories.pending, (state) => {
+        console.log('Fetching categories...');
+        state.fetchState.categories = 'PENDING'; 
+      }).addCase(fetchCategories.fulfilled, (state, action) => {
+        console.log('Categories fetched successfully');
+        state.categories = action.payload;
+        state.fetchState.categories = 'FETCHED';
+      }).addCase(fetchCategories.rejected, (state, action) => {
+        console.log('Error fetching categories:', action.error);
+        state.fetchState.categories = 'FAILED';
+      })
+    },
+  });
 
 export const {
   setCategories,
   setProductList,
   setTotal,
-  setFetchState,
   setLimit,
   setOffset,
   setFilter,
+  setFetchStateCategories,
+  setFetchStateProductList,
 } = productSlice.actions;
 export default productSlice.reducer;
-  
