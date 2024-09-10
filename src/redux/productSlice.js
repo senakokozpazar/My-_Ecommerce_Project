@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { axiosInstance } from '@/hooks/useAxios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   categories: [],
@@ -9,6 +10,14 @@ const initialState = {
   filter: '',
   fetchState: 'NOT_FETCHED',
 };  
+
+export const fetchCategories = createAsyncThunk(
+  'product/fetchCategories',
+  async () => {
+    const response = await axiosInstance.get('/categories');
+    return response.data;
+  }
+);
 
 const productSlice = createSlice({
   name: 'product',
@@ -34,7 +43,15 @@ const productSlice = createSlice({
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
-    }}});
+    }},
+    extraReducers: (builder) => {
+      builder
+        .addCase(fetchCategories.fulfilled, (state, action) => {
+          state.categories = action.payload; 
+        })}
+      });
+
+    
 
 export const {
   setCategories,

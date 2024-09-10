@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link, NavLink, useHistory } from "react-router-dom";
 import Gravatar from "react-gravatar";
 import { logout } from "@/redux/clientSlice";
+import ShopDropdown from "@/components/shopDropDown";
 
 export default function Header() {
   const location = useLocation();
@@ -71,13 +72,7 @@ export default function Header() {
               >
                 Home
               </NavLink>
-              <NavLink
-                to="/shop"
-                activeClassName="active_link"
-                className="font-semibold"
-              >
-                Shop
-              </NavLink>
+              <ShopDropdown />
               <NavLink
                 to="/aboutus"
                 activeClassName="active_link"

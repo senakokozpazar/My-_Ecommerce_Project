@@ -75,12 +75,12 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          className="bg-#23A6F0 hover:bg-#1a73e8 focus:shadow-outline w-full rounded px-4 py-2 font-bold text-white focus:outline-none"
+          className="hover:bg-#1a73e8 focus:shadow-outline w-full rounded bg-[#23A6F0] px-4 py-2 font-bold text-white focus:outline-none"
         >
           Login
         </button>
       </form>
-      <p className="text-sm text-gray-600">
+      <p className="mt-3 text-sm text-gray-600">
         Don't have an account?
         <span>
           <Link
