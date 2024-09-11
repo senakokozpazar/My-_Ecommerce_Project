@@ -19,8 +19,15 @@ export const fetchCategories = createAsyncThunk('product/fetchCategories', async
 
 });
 
+export const fetchProducts = createAsyncThunk('product/fetchProducts', async () => {
+  const response = await axiosInstance.get('/products');
+  console.log(response.data);
+  return response.data;
+
+});
+
 const productSlice = createSlice({
-  name: 'product',
+  name: 'products',
   initialState,
   reducers: {
     setCategories: (state, action) => {
@@ -59,6 +66,17 @@ const productSlice = createSlice({
       }).addCase(fetchCategories.rejected, (state, action) => {
         console.log('Error fetching categories:', action.error);
         state.fetchState.categories = 'FAILED';
+      })
+      .addCase(fetchProducts.pending, (state) => {
+        console.log('Fetching products...');
+        state.fetchState.productList = 'PENDING'; 
+      }).addCase(fetchProducts.fulfilled, (state, action) => {
+        console.log('Products fetched successfully');
+        state.productList = action.payload;
+        state.fetchState.productList = 'FETCHED';
+      }).addCase(fetchProducts.rejected, (state, action) => {
+        console.log('Error fetching products:', action.error);
+        state.fetchState.productList = 'FAILED';
       })
     },
   });

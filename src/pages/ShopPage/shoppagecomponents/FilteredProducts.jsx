@@ -1,10 +1,13 @@
-import { products } from "@/mockdatas/product";
 import { Button } from "../../../components/ui/button";
 import { productimages } from "@/mockdatas/productimages";
 import { Link } from "react-router-dom";
 import ColorCircle from "@/components/ColorCircle";
+import { useSelector } from "react-redux";
 
 export default function FilteredProducts() {
+  const products = useSelector((state) => state.products.productList);
+  console.log(products);
+
   return (
     <div className="font-montserrat">
       <div className="flex flex-col items-center justify-center gap-3 lg:mt-10 lg:flex-row lg:justify-around">

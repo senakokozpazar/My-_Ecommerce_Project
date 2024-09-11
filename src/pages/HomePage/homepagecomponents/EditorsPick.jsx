@@ -1,29 +1,6 @@
 import { useSelector } from "react-redux";
 
 export default function EditorsPick() {
-  /*const cards = [
-    {
-      src: "/editorspick/product-cover-11.png",
-      alt: "carditem1",
-      buttonText: "MEN",
-    },
-    {
-      src: "/editorspick/media bg-cover.png",
-      alt: "carditem2",
-      buttonText: "WOMEN",
-    },
-    {
-      src: "/editorspick/media bg-cover2.png",
-      alt: "carditem3",
-      buttonText: "ACCESSORIES",
-    },
-    {
-      src: "/editorspick/filter2.png",
-      alt: "carditem4",
-      buttonText: "KIDS",
-    },
-  ]; */
-
   const categories = useSelector((state) => state.products?.categories);
   const sortedCategories = [...categories].sort((a, b) => b.rating - a.rating);
 
