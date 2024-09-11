@@ -1,12 +1,42 @@
 import { Button } from "../../../components/ui/button";
-import { productimages } from "@/mockdatas/productimages";
 import { Link } from "react-router-dom";
 import ColorCircle from "@/components/ColorCircle";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchProducts } from "@/redux/productSlice";
 
 export default function FilteredProducts() {
-  const products = useSelector((state) => state.products.productList);
+  const products = useSelector((state) => state.products.productList.products);
   console.log(products);
+
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(fetchProducts())
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <div
+          className="spinner-border inline-block h-8 w-8 animate-spin rounded-full border-4"
+          role="status"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="font-montserrat">
@@ -31,72 +61,61 @@ export default function FilteredProducts() {
           <Button className="className=text-sm bg-[#23A6F0]">Filter</Button>
         </div>
       </div>
-      {/* Mobile  */}
-      {products.slice(0, 4).map((product) => (
+      {/*Mobile */}
+      {products.map((product) => (
         <Link key={product.id} to={`/product/${product.id}`} className="block">
           <div
             key={product.id}
             className="m-10 flex flex-col items-center justify-center gap-3 lg:hidden"
           >
             <img
-              src={product.imageSrc}
-              alt={product.title}
-              className="h-[427px] w-[348px] lg:h-[223px] lg:w-[205px]"
+              src={product.images[0].url}
+              alt={product.name}
+              className="object-cover"
             />
             <p className="mt-4 text-center text-base font-semibold">
-              {product.title}
+              {product.name}
             </p>
-            <p className="text-center text-sm font-semibold text-gray-500">
-              {product.subtitle}
+            <p className="p-2 text-justify text-sm font-semibold text-gray-500">
+              {product.description}
             </p>
             <div className="mt-2 flex items-center justify-center">
               <p className="mr-2 text-base font-semibold text-[#BDBDBD]">
-                {product.oldPrice}
-              </p>
-              <p className="text-base font-semibold text-[#23856D]">
-                {product.newPrice}
+                {product.price}
               </p>
             </div>
             <ColorCircle />
           </div>
         </Link>
       ))}
+
       {/* Desktop  */}
       <div className="hidden items-center justify-center lg:flex lg:flex-wrap">
-        {productimages.map((image) => (
+        {products.map((product) => (
           <div
-            key={image.id}
+            key={product.id}
             className="m-10 w-1/4 flex-col items-center justify-center gap-1"
           >
-            <Link key={image.id} to={`/product/${image.id}`}>
+            <Link key={product.id} to={`/product/${product.id}`}>
               <img
-                src={image.imageSrc}
-                alt={image.title}
-                className="h-[427px] w-[348px]"
+                src={product.images[0].url}
+                alt={product.name}
+                className="object-cover"
               />
             </Link>
             <p className="mt-4 text-center text-base font-semibold">
-              {image.title}
+              {product.name}
             </p>
-            <p className="text-center text-sm font-semibold text-gray-500">
-              {image.subtitle}
+            <p className="p-2 text-justify text-sm font-semibold text-gray-500">
+              {product.description}
             </p>
             <div className="mt-2 flex items-center justify-center">
               <p className="mr-2 text-base font-semibold text-[#BDBDBD]">
-                {image.oldPrice}
-              </p>
-              <p className="text-base font-semibold text-[#23856D]">
-                {image.newPrice}
+                {product.price}
               </p>
             </div>
             <div className="mt-4 flex justify-center space-x-2">
-              {image.colors.map((color, index) => (
-                <div
-                  key={index}
-                  className="h-6 w-6 rounded-full"
-                  style={{ backgroundColor: color }}
-                ></div>
-              ))}
+              <ColorCircle />
             </div>
           </div>
         ))}

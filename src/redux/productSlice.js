@@ -12,18 +12,18 @@ const initialState = {
   
 };  
 
-export const fetchCategories = createAsyncThunk('product/fetchCategories', async () => {
+export const fetchCategories = createAsyncThunk('products/fetchCategories', async () => {
   const response = await axiosInstance.get('/categories');
   console.log(response.data);
   return response.data;
 
 });
 
-export const fetchProducts = createAsyncThunk('product/fetchProducts', async () => {
-  const response = await axiosInstance.get('/products');
-  console.log(response.data);
-  return response.data;
 
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+    const response = await axiosInstance.get('/products');
+    console.log('Response:', response.data);
+    return response.data; 
 });
 
 const productSlice = createSlice({
@@ -57,25 +57,26 @@ const productSlice = createSlice({
     extraReducers: (builder) => {
       builder
       .addCase(fetchCategories.pending, (state) => {
-        console.log('Fetching categories...');
+     
         state.fetchState.categories = 'PENDING'; 
       }).addCase(fetchCategories.fulfilled, (state, action) => {
-        console.log('Categories fetched successfully');
+      
         state.categories = action.payload;
         state.fetchState.categories = 'FETCHED';
       }).addCase(fetchCategories.rejected, (state, action) => {
-        console.log('Error fetching categories:', action.error);
+       
         state.fetchState.categories = 'FAILED';
       })
       .addCase(fetchProducts.pending, (state) => {
-        console.log('Fetching products...');
+  
         state.fetchState.productList = 'PENDING'; 
       }).addCase(fetchProducts.fulfilled, (state, action) => {
-        console.log('Products fetched successfully');
+  
         state.productList = action.payload;
+        state.total = action.payload.total;
         state.fetchState.productList = 'FETCHED';
       }).addCase(fetchProducts.rejected, (state, action) => {
-        console.log('Error fetching products:', action.error);
+    
         state.fetchState.productList = 'FAILED';
       })
     },
