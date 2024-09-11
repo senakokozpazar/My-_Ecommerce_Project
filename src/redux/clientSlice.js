@@ -122,13 +122,13 @@ const clientSlice = createSlice({
         state.user = {};
       })
       .addCase(autoLogin.fulfilled, (state, action) => {
-        if (action.payload) {
+    
           state.user = action.payload;
-        }})
-        .addCase(logout.fulfilled, (state) => {
+      })
+      .addCase(logout.fulfilled, (state) => {
           console.log('Logout fulfilled, setting user to null');
           state.user = null;
-        });
+      });
   }
 });
 

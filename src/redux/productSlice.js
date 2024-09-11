@@ -20,10 +20,29 @@ export const fetchCategories = createAsyncThunk('products/fetchCategories', asyn
 });
 
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-    const response = await axiosInstance.get('/products');
-    console.log('Response:', response.data);
-    return response.data; 
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async (params = {}) => {
+  const { category, filter, sort } = params;
+  const queryParams = [];
+
+  if (category) {
+    queryParams.push(`category=${category}`);
+  }
+
+  if (filter) {
+    queryParams.push(`filter=${filter}`);
+  }
+
+  if (sort) {
+    queryParams.push(`sort=${sort}`);
+  }
+
+  const queryString = queryParams.join('&');
+  const url = queryString ? `/products?${queryString}` : '/products';
+
+
+  const response = await axiosInstance.get(url);
+  console.log('Response:', response.data);
+  return response.data;
 });
 
 const productSlice = createSlice({

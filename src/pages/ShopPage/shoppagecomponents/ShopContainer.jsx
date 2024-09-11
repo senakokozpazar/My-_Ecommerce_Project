@@ -31,13 +31,15 @@ export default function ShopContainer() {
   ];
   return (
     <div className="bg-[#FAFAFA] pb-10 font-montserrat">
-      <div className="m-10 mb-5 flex items-center justify-center p-14">
+      <div className="m-10 mb-0 flex items-center justify-center p-14">
         <h1 className="text-2xl font-semibold leading-[32px] tracking-[0.1px] text-[#252B42]">
           Shop
         </h1>
       </div>
 
-      <BreadCrumb />
+      <div className="flex items-center justify-center">
+        <BreadCrumb />
+      </div>
 
       <div className="flex flex-col items-center justify-center gap-3 lg:m-3 lg:flex-row lg:justify-around">
         {shopCards.map((card, index) => (

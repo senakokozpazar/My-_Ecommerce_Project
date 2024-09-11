@@ -81,7 +81,7 @@ export default function FilteredProducts() {
             </p>
             <div className="mt-2 flex items-center justify-center">
               <p className="mr-2 text-base font-semibold text-[#BDBDBD]">
-                {product.price}
+                {product.price} TL
               </p>
             </div>
             <ColorCircle />
@@ -111,7 +111,7 @@ export default function FilteredProducts() {
             </p>
             <div className="mt-2 flex items-center justify-center">
               <p className="mr-2 text-base font-semibold text-[#BDBDBD]">
-                {product.price}
+                {product.price} TL
               </p>
             </div>
             <div className="mt-4 flex justify-center space-x-2">
