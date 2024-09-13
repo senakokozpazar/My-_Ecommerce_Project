@@ -24,18 +24,17 @@ export const fetchCategories = createAsyncThunk('products/fetchCategories', asyn
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async ({ categoryId, sort, filter }) => {
-    const queryParams = [];
+    const params = new URLSearchParams();
     if (categoryId) {
-      queryParams.push(`category=${categoryId}`);
+      params.append('category', categoryId);
     }
     if (sort) {
-      queryParams.push(`sort=${sort}`);
+      params.append('sort', sort);
     }
     if (filter) {
-      queryParams.push(`filter=${filter}`);
+      params.append('filter', filter);
     }
-    const queryString = queryParams.join('&');
-    const url = `/products?${queryString}`;
+    const url = `/products?${params.toString()}`;
     const response = await axiosInstance.get(url);
     return response.data;
   }
@@ -62,16 +61,13 @@ const productSlice = createSlice({
     },
     setSort: (state, action) => {
       const sortValue = action.payload;
+      const sortedProductList = [...state.productList];
       if (sortValue === 'price:asc') {
-        state.productList = state.productList.sort((a, b) => a.price - b.price);
+        sortedProductList.sort((a, b) => a.price - b.price);
       } else if (sortValue === 'price:desc') {
-        state.productList = state.productList.sort((a, b) => b.price - a.price);
-      } else if (sortValue === 'rating:asc') {
-        state.productList = state.productList.sort((a, b) => a.rating - b.rating);
-      } else if (sortValue === 'rating:desc') {
-        state.productList = state.productList.sort((a, b) => b.rating - a.rating);
+        sortedProductList.sort((a, b) => b.price - a.price);
       }
-      state.sort = sortValue;
+      state.productList = sortedProductList;
     },
     setFilter: (state, action) => {
       const filterValue = action.payload;
