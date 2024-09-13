@@ -3,44 +3,49 @@ import { Link } from "react-router-dom";
 import ColorCircle from "@/components/ColorCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProducts, setFilter, setSort } from "@/redux/productSlice";
-import { useParams } from "react-router-dom";
+import { fetchProducts, setFilter } from "@/redux/productSlice";
+import { useParams, useHistory } from "react-router-dom";
 
 export default function FilteredProducts() {
+  const history = useHistory();
+  const { gender, categoryName, categoryId } = useParams(); // Extract params from the URL
+  console.log(gender, categoryName, categoryId);
+  const dispatch = useDispatch();
+
   const products = useSelector((state) => state.products.productList.products);
-  console.log(products);
-  const { categoryId } = useParams();
   const { sort, filter } = useSelector((state) => state.products);
   const [loading, setLoading] = useState(true);
 
-  const [filterInput, setFilterInput] = useState("");
-  const [sortValue, setSortValue] = useState("price:asc");
+  const [filterInput, setFilterInput] = useState(filter);
+  const [sortValue, setSortValue] = useState(sort || "price:asc");
 
-  const dispatch = useDispatch();
-
+  // Fetch products based on the current categoryId, sort, and filter
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchProducts({ categoryId, sort, filter }))
-      .then(() => {
-        setLoading(false);
-      })
+    dispatch(
+      fetchProducts({ categoryId, sort: sortValue, filter: filterInput }),
+    )
+      .then(() => setLoading(false))
       .catch((error) => {
         console.error(error);
         setLoading(false);
       });
-  }, [categoryId, sort, filter]);
+  }, [categoryId, sortValue, filterInput]); // Re-fetch whenever category, sort, or filter changes
 
-  const handleFilterChange = (event) => {
-    setFilterInput(event.target.value);
-  };
+  // Handle filter input changes
+  const handleFilterChange = (event) => setFilterInput(event.target.value);
 
-  const handleSortChange = (event) => {
-    setSortValue(event.target.value);
-  };
+  // Handle sort selection changes
+  const handleSortChange = (event) => setSortValue(event.target.value);
 
+  // Apply filter and sort
   const handleApplyFilter = () => {
     dispatch(setFilter(filterInput));
     dispatch(setSort(sortValue));
+    // Construct the URL with the selected sort and filter
+    history.push(
+      `/shop/${gender}/${categoryName}/${categoryId}?sort=${sortValue}&filter=${filterInput}`,
+    );
   };
 
   if (loading) {

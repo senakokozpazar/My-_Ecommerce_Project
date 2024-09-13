@@ -7,7 +7,6 @@ const initialState = {
   total: 0,
   limit: 25,
   offset: 0,
-  sort: 'price:asc',
   filter: '',
   fetchState: {categories: 'NOT_FETCHED', productList: 'NOT_FETCHED'},
   
@@ -59,16 +58,7 @@ const productSlice = createSlice({
     setOffset: (state, action) => {
       state.offset = action.payload;
     },
-    setSort: (state, action) => {
-      const sortValue = action.payload;
-      const sortedProductList = [...state.productList];
-      if (sortValue === 'price:asc') {
-        sortedProductList.sort((a, b) => a.price - b.price);
-      } else if (sortValue === 'price:desc') {
-        sortedProductList.sort((a, b) => b.price - a.price);
-      }
-      state.productList = sortedProductList;
-    },
+  
     setFilter: (state, action) => {
       const filterValue = action.payload;
       state.filter = filterValue;
@@ -113,7 +103,6 @@ export const {
   setTotal,
   setLimit,
   setOffset,
-  setSort,
   setFilter,
   setFetchStateCategories,
   setFetchStateProductList,
