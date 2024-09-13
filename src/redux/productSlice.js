@@ -24,6 +24,7 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async ({ categoryId, sort, filter }) => {
     const params = new URLSearchParams();
+   
     if (categoryId) {
       params.append('category', categoryId);
     }
