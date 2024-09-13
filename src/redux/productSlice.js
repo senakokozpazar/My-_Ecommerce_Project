@@ -7,6 +7,7 @@ const initialState = {
   total: 0,
   limit: 25,
   offset: 0,
+  sort: 'price:asc',
   filter: '',
   fetchState: {categories: 'NOT_FETCHED', productList: 'NOT_FETCHED'},
   
@@ -20,30 +21,25 @@ export const fetchCategories = createAsyncThunk('products/fetchCategories', asyn
 });
 
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async (params = {}) => {
-  const { category, filter, sort } = params;
-  const queryParams = [];
-
-  if (category) {
-    queryParams.push(`category=${category}`);
+export const fetchProducts = createAsyncThunk(
+  'products/fetchProducts',
+  async ({ categoryId, sort, filter }) => {
+    const queryParams = [];
+    if (categoryId) {
+      queryParams.push(`category=${categoryId}`);
+    }
+    if (sort) {
+      queryParams.push(`sort=${sort}`);
+    }
+    if (filter) {
+      queryParams.push(`filter=${filter}`);
+    }
+    const queryString = queryParams.join('&');
+    const url = `/products?${queryString}`;
+    const response = await axiosInstance.get(url);
+    return response.data;
   }
-
-  if (filter) {
-    queryParams.push(`filter=${filter}`);
-  }
-
-  if (sort) {
-    queryParams.push(`sort=${sort}`);
-  }
-
-  const queryString = queryParams.join('&');
-  const url = queryString ? `/products?${queryString}` : '/products';
-
-
-  const response = await axiosInstance.get(url);
-  console.log('Response:', response.data);
-  return response.data;
-});
+);
 
 const productSlice = createSlice({
   name: 'products',
@@ -64,8 +60,22 @@ const productSlice = createSlice({
     setOffset: (state, action) => {
       state.offset = action.payload;
     },
+    setSort: (state, action) => {
+      const sortValue = action.payload;
+      if (sortValue === 'price:asc') {
+        state.productList = state.productList.sort((a, b) => a.price - b.price);
+      } else if (sortValue === 'price:desc') {
+        state.productList = state.productList.sort((a, b) => b.price - a.price);
+      } else if (sortValue === 'rating:asc') {
+        state.productList = state.productList.sort((a, b) => a.rating - b.rating);
+      } else if (sortValue === 'rating:desc') {
+        state.productList = state.productList.sort((a, b) => b.rating - a.rating);
+      }
+      state.sort = sortValue;
+    },
     setFilter: (state, action) => {
-      state.filter = action.payload;
+      const filterValue = action.payload;
+      state.filter = filterValue;
     },
     setFetchStateCategories: (state, action) => {
       state.fetchState.categories = action.payload;
@@ -107,6 +117,7 @@ export const {
   setTotal,
   setLimit,
   setOffset,
+  setSort,
   setFilter,
   setFetchStateCategories,
   setFetchStateProductList,

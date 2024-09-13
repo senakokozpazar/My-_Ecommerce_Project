@@ -56,7 +56,7 @@ function ShopDropdown() {
                       .map((category) => (
                         <li key={category.id} className="mb-2">
                           <NavLink
-                            to={`/shop/kadın/${category.title.toLowerCase()}`}
+                            to={`/shop/kadın/${category.title.toLowerCase()}/${category.id}`}
                             className="hover:underline"
                           >
                             {category.title}
@@ -75,7 +75,7 @@ function ShopDropdown() {
                       .map((category) => (
                         <li key={category.id} className="mb-2">
                           <NavLink
-                            to={`/shop/erkek/${category.title}`}
+                            to={`/shop/erkek/${category.title}/${category.id}`}
                             className="hover:underline"
                           >
                             {category.title}

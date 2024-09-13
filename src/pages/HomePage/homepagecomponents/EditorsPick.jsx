@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function EditorsPick() {
   const categories = useSelector((state) => state.products?.categories);
@@ -22,12 +23,12 @@ export default function EditorsPick() {
                 alt={category.title}
                 className="h-full w-full object-cover"
               />
-              <a
-                href={`/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title.toLowerCase()}`}
+              <Link
+                to={`/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title.toLowerCase()}/${category.id}`}
                 className="absolute bottom-4 left-4 bg-white px-4 py-2 text-sm font-semibold text-black"
               >
                 {category.title}
-              </a>
+              </Link>
             </div>
           ))}
         <div className="lg:flex-2 flex flex-col gap-6 lg:flex lg:flex-col lg:gap-[16px]">
@@ -38,12 +39,12 @@ export default function EditorsPick() {
                 alt={category.title}
                 className="h-full w-full object-cover"
               />
-              <a
-                href={`/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title.toLowerCase()}`}
+              <Link
+                to={`/shop/${category.gender === "k" ? "kadin" : "erkek"}/${category.title.toLowerCase()}/${category.id}`}
                 className="absolute bottom-4 left-4 bg-white px-4 py-2 text-sm font-semibold text-black"
               >
                 {category.title}
-              </a>
+              </Link>
             </div>
           ))}
         </div>

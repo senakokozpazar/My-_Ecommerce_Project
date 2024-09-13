@@ -3,19 +3,24 @@ import { Link } from "react-router-dom";
 import ColorCircle from "@/components/ColorCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProducts } from "@/redux/productSlice";
+import { fetchProducts, setFilter, setSort } from "@/redux/productSlice";
+import { useParams } from "react-router-dom";
 
 export default function FilteredProducts() {
   const products = useSelector((state) => state.products.productList.products);
   console.log(products);
+  const { categoryId } = useParams();
+  const { sort, filter } = useSelector((state) => state.products);
+  const [loading, setLoading] = useState(true);
+
+  const [filterInput, setFilterInput] = useState("");
+  const [sortValue, setSortValue] = useState("price:asc");
 
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchProducts())
+    dispatch(fetchProducts({ categoryId, sort, filter }))
       .then(() => {
         setLoading(false);
       })
@@ -23,7 +28,20 @@ export default function FilteredProducts() {
         console.error(error);
         setLoading(false);
       });
-  }, []);
+  }, [categoryId, sort, filter]);
+
+  const handleFilterChange = (event) => {
+    setFilterInput(event.target.value);
+  };
+
+  const handleSortChange = (event) => {
+    setSortValue(event.target.value);
+  };
+
+  const handleApplyFilter = () => {
+    dispatch(setFilter(filterInput));
+    dispatch(setSort(sortValue));
+  };
 
   if (loading) {
     return (
@@ -54,11 +72,29 @@ export default function FilteredProducts() {
           </Button>
         </div>
         <div className="m-3 flex gap-2">
-          <Button variant="outline" className="text-sm text-[#737373]">
-            Popularity
-            <i className="fa-solid fa-chevron-down ml-1 text-[#737373]"></i>
+          <select
+            value={sortValue}
+            onChange={handleSortChange}
+            className="text-sm text-[#737373]"
+          >
+            <option value="price:asc">Price: Asc</option>
+            <option value="price:desc">Price: Desc</option>
+            <option value="rating:asc">Rating: Asc</option>
+            <option value="rating:desc">Rating: Desc</option>
+          </select>
+          <input
+            type="text"
+            value={filterInput}
+            onChange={handleFilterChange}
+            placeholder="Filter"
+            className="text-sm text-[#737373]"
+          />
+          <Button
+            onClick={handleApplyFilter}
+            className="className=text-sm bg-[#23A6F0]"
+          >
+            Apply
           </Button>
-          <Button className="className=text-sm bg-[#23A6F0]">Filter</Button>
         </div>
       </div>
       {/*Mobile */}
