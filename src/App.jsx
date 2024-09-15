@@ -30,7 +30,13 @@ function App() {
             <HomePage />
           </PageContent>
         </Route>
-        <Route path="/shop">
+        <Route exact path="/shop">
+          <PageContent>
+            <ShopPage />
+          </PageContent>
+        </Route>
+        {/* Route to handle /shop/:gender/:categoryTitle/:categoryId */}
+        <Route path="/shop/:gender/:categoryName/:categoryId">
           <PageContent>
             <ShopPage />
           </PageContent>

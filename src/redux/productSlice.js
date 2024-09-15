@@ -7,6 +7,7 @@ const initialState = {
   total: 0,
   limit: 25,
   offset: 0,
+  sort: 'price:asc',
   filter: '',
   fetchState: {categories: 'NOT_FETCHED', productList: 'NOT_FETCHED'},
   
@@ -22,9 +23,9 @@ export const fetchCategories = createAsyncThunk('products/fetchCategories', asyn
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ categoryId, sort, filter }) => {
+  async ({ categoryId, sort, filter, limit, offset }) => {
     const params = new URLSearchParams();
-   
+    
     if (categoryId) {
       params.append('category', categoryId);
     }
@@ -34,7 +35,14 @@ export const fetchProducts = createAsyncThunk(
     if (filter) {
       params.append('filter', filter);
     }
+    if (limit) {
+      params.append('limit', limit);
+    }
+    if (offset) {
+      params.append('offset', offset);
+    }
     const url = `/products?${params.toString()}`;
+    console.log(window.location.pathname);
     const response = await axiosInstance.get(url);
     return response.data;
   }
@@ -59,9 +67,10 @@ const productSlice = createSlice({
     setOffset: (state, action) => {
       state.offset = action.payload;
     },
-  
+    setSort: (state, action) => {
+      state.sort = sortValue;
+    },
     setFilter: (state, action) => {
-      const filterValue = action.payload;
       state.filter = filterValue;
     },
     setFetchStateCategories: (state, action) => {
@@ -87,7 +96,6 @@ const productSlice = createSlice({
   
         state.fetchState.productList = 'PENDING'; 
       }).addCase(fetchProducts.fulfilled, (state, action) => {
-  
         state.productList = action.payload;
         state.total = action.payload.total;
         state.fetchState.productList = 'FETCHED';
@@ -104,6 +112,7 @@ export const {
   setTotal,
   setLimit,
   setOffset,
+  setSort,
   setFilter,
   setFetchStateCategories,
   setFetchStateProductList,

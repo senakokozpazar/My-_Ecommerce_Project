@@ -3,50 +3,63 @@ import { Link } from "react-router-dom";
 import ColorCircle from "@/components/ColorCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProducts, setFilter } from "@/redux/productSlice";
-import { useParams, useHistory } from "react-router-dom";
+import { fetchProducts } from "@/redux/productSlice";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 export default function FilteredProducts() {
   const history = useHistory();
-  const { gender, categoryName, categoryId } = useParams(); // Extract params from the URL
-  console.log(gender, categoryName, categoryId);
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const products = useSelector((state) => state.products.productList.products);
+  const products = useSelector((state) => state.products.productList?.products);
   const { sort, filter } = useSelector((state) => state.products);
   const [loading, setLoading] = useState(true);
-
   const [filterInput, setFilterInput] = useState(filter);
   const [sortValue, setSortValue] = useState(sort || "price:asc");
-
-  // Fetch products based on the current categoryId, sort, and filter
-  useEffect(() => {
-    setLoading(true);
-    dispatch(
-      fetchProducts({ categoryId, sort: sortValue, filter: filterInput }),
-    )
-      .then(() => setLoading(false))
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, [categoryId, sortValue, filterInput]); // Re-fetch whenever category, sort, or filter changes
+  const params = new URLSearchParams(location.search);
+  const { categoryId } = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Handle filter input changes
-  const handleFilterChange = (event) => setFilterInput(event.target.value);
+  const handleFilterChange = (event) => {
+    setFilterInput(event.target.value);
+    const newParams = new URLSearchParams(location.search);
+    newParams.set("filter", event.target.value);
+    history.push({ search: newParams.toString() });
+  };
 
   // Handle sort selection changes
-  const handleSortChange = (event) => setSortValue(event.target.value);
+  const handleSortChange = (event) => {
+    setSortValue(event.target.value);
+    const newParams = new URLSearchParams(location.search);
+    newParams.set("sort", event.target.value);
+    history.push({ search: newParams.toString() });
+  };
 
   // Apply filter and sort
   const handleApplyFilter = () => {
-    dispatch(setFilter(filterInput));
-    dispatch(setSort(sortValue));
-    // Construct the URL with the selected sort and filter
-    history.push(
-      `/shop/${gender}/${categoryName}/${categoryId}?sort=${sortValue}&filter=${filterInput}`,
-    );
+    setSearchQuery(filterInput);
   };
+
+  useEffect(() => {
+    setLoading(true);
+    console.log("categoryId", categoryId);
+    dispatch(
+      fetchProducts({
+        categoryId,
+        sort: sortValue,
+        filter: searchQuery,
+      }),
+    )
+      .then(() => {
+        setLoading(false);
+        console.log("Products fetched:", products); // Veriyi konsolda kontrol edin
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      });
+  }, [categoryId, sortValue, searchQuery]);
 
   if (loading) {
     return (
