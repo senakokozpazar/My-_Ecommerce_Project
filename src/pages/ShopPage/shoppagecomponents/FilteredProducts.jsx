@@ -12,6 +12,7 @@ export default function FilteredProducts() {
   const location = useLocation();
 
   const products = useSelector((state) => state.products.productList?.products);
+  console.log("products:", products);
   const { sort, filter } = useSelector((state) => state.products);
   const [loading, setLoading] = useState(true);
   const [filterInput, setFilterInput] = useState(filter);
