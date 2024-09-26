@@ -50,8 +50,10 @@ export default function FilteredProducts() {
   //Page Change
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    const newOffset = (newPage - 1) * limit; // offset is calculated based on the page number and limit
     const newParams = new URLSearchParams(location.search);
-    newParams.set("page", newPage);
+    newParams.set("limit", limit);
+    newParams.set("offset", newOffset); // Set the offset in the URL
     history.push({ search: newParams.toString() });
   };
 
