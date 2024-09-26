@@ -23,7 +23,7 @@ export const fetchCategories = createAsyncThunk('products/fetchCategories', asyn
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ categoryId, sort, filter}) => {
+  async ({ categoryId, sort, filter, limit, offset }) => {
     const params = new URLSearchParams();
     
     if (categoryId) {
@@ -35,6 +35,8 @@ export const fetchProducts = createAsyncThunk(
     if (filter) {
       params.append('filter', filter);
     }
+    params.append('limit', limit);
+    params.append('offset', offset);
     const url = `/products?${params.toString()}`;
     console.log(window.location.pathname);
     const response = await axiosInstance.get(url);

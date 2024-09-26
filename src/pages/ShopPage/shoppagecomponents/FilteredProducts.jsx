@@ -12,7 +12,10 @@ export default function FilteredProducts() {
   const location = useLocation();
 
   const products = useSelector((state) => state.products.productList?.products);
-  console.log("products:", products);
+  const total = useSelector((state) => state.products.total);
+  const limit = useSelector((state) => state.products.limit);
+  const offset = useSelector((state) => state.products.offset);
+  const [currentPage, setCurrentPage] = useState(1);
   const { sort, filter } = useSelector((state) => state.products);
   const [loading, setLoading] = useState(true);
   const [filterInput, setFilterInput] = useState(filter);
@@ -20,6 +23,8 @@ export default function FilteredProducts() {
   const params = new URLSearchParams(location.search);
   const { categoryId } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const totalPages = Math.ceil(total / limit);
 
   // Handle filter input changes
   const handleFilterChange = (event) => {
@@ -42,25 +47,35 @@ export default function FilteredProducts() {
     setSearchQuery(filterInput);
   };
 
+  //Page Change
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    const newParams = new URLSearchParams(location.search);
+    newParams.set("page", newPage);
+    history.push({ search: newParams.toString() });
+  };
+
   useEffect(() => {
     setLoading(true);
-    console.log("categoryId", categoryId);
+    //console.log("categoryId", categoryId);
     dispatch(
       fetchProducts({
         categoryId,
         sort: sortValue,
         filter: searchQuery,
+        limit,
+        offset: (currentPage - 1) * limit,
       }),
     )
       .then(() => {
         setLoading(false);
-        console.log("Products fetched:", products); // Veriyi konsolda kontrol edin
+        console.log("Products fetched:", products);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
         setLoading(false);
       });
-  }, [categoryId, sortValue, searchQuery]);
+  }, [categoryId, sortValue, searchQuery, currentPage]);
 
   if (loading) {
     return (
@@ -179,32 +194,34 @@ export default function FilteredProducts() {
         <Button
           variant="outline"
           className="rounded-none rounded-bl-lg rounded-tl-lg text-[#23A6F0] hover:bg-[#F3F3F3] hover:text-[#BDBDBD]"
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(1)}
         >
           First
         </Button>
         <Button
           variant="outline"
           className="rounded-none text-[#23A6F0] hover:bg-[#23A6F0] hover:text-white"
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
         >
-          1
+          Previous
         </Button>
         <Button
           variant="outline"
           className="rounded-none text-[#23A6F0] hover:bg-[#23A6F0] hover:text-white"
-        >
-          2
-        </Button>
-        <Button
-          variant="outline"
-          className="rounded-none text-[#23A6F0] hover:bg-[#23A6F0] hover:text-white"
-        >
-          3
-        </Button>
-        <Button
-          variant="outline"
-          className="rounded-none rounded-br-lg rounded-tr-lg text-[#23A6F0] hover:bg-[#F3F3F3] hover:text-[#BDBDBD]"
+          disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(currentPage + 1)}
         >
           Next
+        </Button>
+        <Button
+          variant="outline"
+          className="rounded-none text-[#23A6F0] hover:bg-[#23A6F0] hover:text-white"
+          disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(totalPages)}
+        >
+          Last
         </Button>
       </div>
     </div>
